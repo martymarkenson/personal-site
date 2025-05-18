@@ -312,7 +312,7 @@ function Projects() {
       </h2>
       <ol className="mt-6 space-y-4">
         {projects.map((project, projectIndex) => (
-          <li key={projectIndex} className="flex gap-4">
+          <li key={projectIndex} className="flex gap-4 min-h-[72px]">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
               <Image
                 src={project.logo}
