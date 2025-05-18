@@ -386,11 +386,6 @@ export default function Home({ articles }) {
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
-              href="https://github.com/martymarkenson"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
               href="https://www.linkedin.com/in/marty-markenson-08b79058/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
@@ -404,6 +399,11 @@ export default function Home({ articles }) {
               href="https://martymarkenson.substack.com"
               aria-label="Follow on Substack"
               icon={SubstackIcon}
+            />
+            <SocialLink
+              href="https://github.com/martymarkenson"
+              aria-label="Follow on GitHub"
+              icon={GitHubIcon}
             />
           </div>
         </div>
