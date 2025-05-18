@@ -3,57 +3,48 @@ import Head from 'next/head'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import logoAnimaginary from '@/images/logos/animaginary.svg'
-import youphoria from '@/images/logos/YOUphoria.png'
-import orb from '@/images/logos/orb.gif'
-import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
-import logoHeart from '@/images/logos/gwc.png'
+import logoVibe from '@/images/logos/vibemetaverse_logo.jpg'
+import logoRecipe from '@/images/logos/recipesaver_logo.png'
+import logoBidtreat from '@/images/logos/bidtreat_logo.png'
+import logoCavelit from '@/images/logos/cavelit_logo.jpg'
 
 const projects = [
   {
-    name: 'YOUphoria: A comprehensive sex education app for teens',
-    description:
-      "YOUphoria is built with Flutter and Firebase Authentication for seamless user experience and secure data handling. Google Maps API provides location-based resources, and ChatGPT API is leveraged to create an inclusive, age-appropriate AI chatbot, addressing teens' nuanced questions with personalized responses.",
+    name: 'The Vibemetaverse',
+    description: 'Vibecoded multiplayer metaverse that reached 200 daily users. Jump through 3D games with friends. Keep your avatar / name',
     link: {
-      href: 'https://github.com/halcyonCore/youphoria',
-      label: 'GitHub',
+      href: 'https://thevibemetaverse.com',
+      label: 'thevibemetaverse.com',
     },
-    logo: youphoria,
+    logo: logoVibe,
   },
   {
-    name: 'Tailwind Animation Exploration',
-    description:
-      'Leveraging Tailwind CSS, this captivating one-page project showcases mesmerizing animations and innovative blend modes for striking color and movement',
+    name: 'Recipe Saver',
+    description: 'Save online recipes and ingredients from a link. Skip all the ads, lifestories and pop-ups',
     link: {
-      href: 'https://tailwind-animation-exploration.vercel.app/',
-      label: 'tailwind-animation-exploration.vercel.app/',
+      href: 'https://v0-recipe-to-i-os-note.vercel.app/',
+      label: 'v0-recipe-to-i-os-note.vercel.app',
     },
-    logo: orb,
+    logo: logoRecipe,
   },
   {
-    name: 'Girls Who Code TXST',
-    description:
-      "I've created the entire structure of our Girls Who Code chapter, including our website! It utilizes Stripe's API to accept donations that fund our events and activities.",
-    link: { href: 'http://gwc-txst.com', label: 'gwc-txst.com' },
-    logo: logoHeart,
+    name: 'Bidtreat.com',
+    description: 'Save up to 75% on luxury travel with weekly emails of the best vacations from charity auctions.',
+    link: {
+      href: 'https://bidtreat.com',
+      label: 'bidtreat.com',
+    },
+    logo: logoBidtreat,
   },
   {
-    name: 'Java vs. C++',
-    description:
-      'Creating an ad-free website that highlights the syntax differences between Java and C++ to benefit the curriculum of my Object Oriented Programming class.',
+    name: 'Cavelit',
+    description: 'AI powered video script generator and editor for realtors.',
     link: {
-      href: 'https://cpp-vs-java.vercel.app/',
-      label: 'cpp-vs-java.vercel.app',
+      href: 'https://martymarkenson.substack.com/p/i-shut-down-my-online-business',
+      label: 'martymarkenson.substack.com',
     },
-    logo: logoAnimaginary,
+    logo: logoCavelit,
   },
-  // {
-  //   name: 'OpenShuttle',
-  //   description:
-  //     'The schematics for the first rocket I designed that successfully made it to orbit.',
-  //   link: { href: '#', label: 'github.com' },
-  //   logo: logoOpenShuttle,
-  // },
 ]
 
 function LinkIcon(props) {
@@ -74,7 +65,7 @@ export default function Projects() {
         <title>Projects - Victoria Jordan</title>
         <meta
           name="description"
-          content="Things I’ve made trying to put my dent in the universe."
+          content="Things I've made trying to put my dent in the universe."
         />
       </Head>
       <SimpleLayout
