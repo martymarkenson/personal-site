@@ -9,7 +9,7 @@ const modeScript = `
 
   function updateMode() {
     let isSystemDarkMode = darkModeMediaQuery.matches
-    let isDarkMode = window.localStorage.isDarkMode === 'true' || (!('isDarkMode' in window.localStorage) && isSystemDarkMode)
+    let isDarkMode = window.localStorage.isDarkMode === 'true' || (!('isDarkMode' in window.localStorage) && false)
 
     if (isDarkMode) {
       document.documentElement.classList.add('dark')
@@ -51,7 +51,7 @@ export default function Document() {
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.json`}
         />
       </Head>
-      <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
+      <body className="flex h-full flex-col bg-white dark:bg-black">
         <Main />
         <NextScript />
       </body>

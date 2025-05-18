@@ -27,6 +27,7 @@ import logoVibe from '@/images/logos/vibemetaverse_logo.jpg'
 import logoRecipe from '@/images/logos/recipesaver_logo.png'
 import logoBidtreat from '@/images/logos/bidtreat_logo.png'
 import logoCavelit from '@/images/logos/cavelit_logo.jpg'
+import logoLinktodonate from '@/images/logos/linktodonate_logo.jpg'
 
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
@@ -281,6 +282,13 @@ function Projects() {
       logo: logoRecipe,
     },
     {
+      name: 'Link to Donate',
+      description: 'Link in bio for influencers easily promote their favorite charities.',
+      year: 'Jan 2025',
+      href: 'https://linktodonate.com',
+      logo: logoLinktodonate,
+    },
+    {
       name: 'Bidtreat.com',
       description: 'Save up to 75% on luxury travel with weekly emails of the best vacations from charity auctions.',
       year: 'Dec 2024',
@@ -304,7 +312,7 @@ function Projects() {
       </h2>
       <ol className="mt-6 space-y-4">
         {projects.map((project, projectIndex) => (
-          <li key={projectIndex} className="flex gap-4">
+          <li key={projectIndex} className="flex gap-4 min-h-[72px]">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
               <Image
                 src={project.logo}
