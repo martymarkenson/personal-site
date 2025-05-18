@@ -27,6 +27,7 @@ import logoVibe from '@/images/logos/vibemetaverse_logo.jpg'
 import logoRecipe from '@/images/logos/recipesaver_logo.png'
 import logoBidtreat from '@/images/logos/bidtreat_logo.png'
 import logoCavelit from '@/images/logos/cavelit_logo.jpg'
+import logoLinktodonate from '@/images/logos/linktodonate_logo.jpg'
 
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
@@ -285,7 +286,7 @@ function Projects() {
       description: 'Link in bio for influencers easily promote their favorite charities.',
       year: 'Jan 2025',
       href: 'https://linktodonate.com',
-      logo: logoBidtreat,
+      logo: logoLinktodonate,
     },
     {
       name: 'Bidtreat.com',
