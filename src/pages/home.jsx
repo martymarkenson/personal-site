@@ -281,6 +281,13 @@ function Projects() {
       logo: logoRecipe,
     },
     {
+      name: 'Link to Donate',
+      description: 'Link in bio for influencers easily promote their favorite charities.',
+      year: 'Jan 2025',
+      href: 'https://linktodonate.com',
+      logo: logoBidtreat,
+    },
+    {
       name: 'Bidtreat.com',
       description: 'Save up to 75% on luxury travel with weekly emails of the best vacations from charity auctions.',
       year: 'Dec 2024',
