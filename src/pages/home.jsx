@@ -277,7 +277,7 @@ function Projects() {
       name: 'Receipe Saver',
       description: 'Save online receipes and ingredients from a link. Skip all the ads, lifestories and pop-ups',
       year: 'Mar 2025',
-      href: 'https://receipesaver.com',
+      href: 'https://v0-recipe-to-i-os-note.vercel.app/',
       logo: logoRecipe,
     },
     {
@@ -290,8 +290,8 @@ function Projects() {
     {
       name: 'Cavelit',
       description: 'AI powered video script generator and editor for realtors.',
-      year: '2020-2024',
-      href: 'https://cavelit.com',
+      year: 'Jul 2024',
+      href: 'https://martymarkenson.substack.com/p/i-shut-down-my-online-business',
       logo: logoCavelit,
     },
   ]
