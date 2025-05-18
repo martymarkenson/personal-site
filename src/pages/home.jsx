@@ -11,18 +11,22 @@ import {
   InstagramIcon,
   GitHubIcon,
   LinkedInIcon,
+  SubstackIcon,
 } from '@/components/SocialIcons'
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
-import logoDell from '@/images/logos/dell.svg'
-import logoFYPM from '@/images/logos/fypm1.svg'
-import logoGWC from '@/images/logos/gwcLogo1.png'
-import logoTXST from '@/images/logos/txstStar.png'
-import halcyoncore from '@/images/logos/hc-logo.png'
-import amazonIcon from '@/images/logos/amazonlogo.png'
+import logoPTC from '@/images/logos/ptcinc_logo.jpeg'
+import logoCS from '@/images/logos/codingscape_logo.jpeg'
+import logoOutliant from '@/images/logos/outliant_logo.jpeg'
+import logoMakerbot from '@/images/logos/makerbot_logo.jpg'
+import logoCognizant from '@/images/logos/cognizant_logo.jpeg'
+import logoVibe from '@/images/logos/vibemetaverse_logo.jpg'
+import logoRecipe from '@/images/logos/recipesaver_logo.png'
+import logoBidtreat from '@/images/logos/bidtreat_logo.png'
+import logoCavelit from '@/images/logos/cavelit_logo.jpg'
 
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
@@ -103,11 +107,21 @@ function Article({ article }) {
 }
 
 function SocialLink({ icon: Icon, ...props }) {
+  const isSubstack = Icon && Icon.name === 'SubstackIcon';
+  const isLarge =
+    Icon &&
+    ["GitHubIcon", "LinkedInIcon", "TwitterIcon"].includes(Icon.name);
   return (
     <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+      <Icon className={
+        isSubstack
+          ? "h-6 w-6 fill-zinc-200 opacity-60 transition group-hover:fill-zinc-400 group-hover:opacity-100 dark:fill-zinc-100 dark:opacity-80 dark:group-hover:fill-zinc-300 dark:group-hover:opacity-100"
+          : isLarge
+            ? "h-7 w-7 fill-zinc-500 transition group-hover:fill-zinc-700 dark:fill-zinc-400 dark:group-hover:fill-zinc-100"
+            : "h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-700 dark:fill-zinc-400 dark:group-hover:fill-zinc-100"
+      } />
     </Link>
-  )
+  );
 }
 
 function Newsletter() {
@@ -142,53 +156,39 @@ function Newsletter() {
 function Resume() {
   let resume = [
     {
-      company: 'Amazon',
-      title: 'Software Engineering Intern',
-      logo: amazonIcon,
-      start: 'May 2023',
-      end: 'Aug 2023',
-    },
-    {
-      company: 'HalcyonCore',
-      title: 'Co-Founder & Lead Engineer',
-      logo: halcyoncore,
-      start: 'March 2023',
+      company: 'Codingscape',
+      title: 'Product Manager',
+      logo: logoCS,
+      start: 'Feb 2025',
       end: 'Present',
     },
     {
-      company: 'Texas State VR Lab',
-      title: 'Virtual Reality Researcher',
-      logo: logoTXST,
-      start: 'Jan 2023',
-      end: 'Present',
+      company: 'Outliant',
+      title: 'Contract Product Manager',
+      logo: logoOutliant,
+      start: 'Jan 2024',
+      end: 'May 2024',
     },
     {
-      company: 'Girls Who Code TXST',
-      title: 'Founder & President',
-      logo: logoGWC,
-      start: 'Feb 2022',
-      end: 'Present',
+      company: 'Makerbot',
+      title: 'Contract Product Manager',
+      logo: logoMakerbot,
+      start: 'Jan 2022',
+      end: 'Mar 2023',
     },
     {
-      company: 'FYPM App',
-      title: 'Front End Engineer Intern',
-      logo: logoFYPM,
-      start: 'April 2022',
-      end: 'July 2022',
+      company: 'PTC',
+      title: 'AR/VR Product Manager',
+      logo: logoPTC,
+      start: 'Dec 2016',
+      end: 'Dec 2021',
     },
     {
-      company: 'Dell Technologies',
-      title: 'Software Engineer Intern',
-      logo: logoDell,
-      start: 'June 2022',
-      end: 'Aug 2022',
-    },
-    {
-      company: 'Dell Technologies',
-      title: 'Software Engineer Intern',
-      logo: logoDell,
-      start: 'May 2021',
-      end: 'Aug 2021',
+      company: 'Cognizant',
+      title: 'QA Analyst',
+      logo: logoCognizant,
+      start: 'Aug 2015',
+      end: 'Mar 2016',
     },
   ]
 
@@ -245,6 +245,97 @@ function Resume() {
   )
 }
 
+function CodeIcon(props) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M16 18l6-6-6-6M8 6l-6 6 6 6"
+        className="stroke-zinc-400 dark:stroke-zinc-500"
+      />
+    </svg>
+  )
+}
+
+function Projects() {
+  let projects = [
+    {
+      name: 'The Vibemetaverse',
+      description: 'Vibecoded multiplayer metaverse that reached 200 daily users. Jump through 3D games with friends. Keep your avatar / name',
+      year: 'Apr 2025',
+      href: 'https://thevibemetaverse.com',
+      logo: logoVibe,
+    },
+    {
+      name: 'Receipe Saver',
+      description: 'Save online receipes and ingredients from a link. Skip all the ads, lifestories and pop-ups',
+      year: 'Mar 2025',
+      href: 'https://v0-recipe-to-i-os-note.vercel.app/',
+      logo: logoRecipe,
+    },
+    {
+      name: 'Bidtreat.com',
+      description: 'Save up to 75% on luxury travel with weekly emails of the best vacations from charity auctions.',
+      year: 'Dec 2024',
+      href: 'https://bidtreat.com',
+      logo: logoBidtreat,
+    },
+    {
+      name: 'Cavelit',
+      description: 'AI powered video script generator and editor for realtors.',
+      year: 'Jul 2024',
+      href: 'https://martymarkenson.substack.com/p/i-shut-down-my-online-business',
+      logo: logoCavelit,
+    },
+  ]
+
+  return (
+    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <CodeIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Projects</span>
+      </h2>
+      <ol className="mt-6 space-y-4">
+        {projects.map((project, projectIndex) => (
+          <li key={projectIndex} className="flex gap-4">
+            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+              <Image
+                src={project.logo}
+                alt=""
+                className="h-7 w-7 rounded-full"
+                unoptimized
+              />
+            </div>
+            <dl className="flex flex-auto flex-wrap gap-x-2">
+              <dt className="sr-only">Project</dt>
+              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <Link href={project.href} className="hover:text-teal-500 transition-colors">
+                  {project.name}
+                </Link>
+              </dd>
+              <dt className="sr-only">Description</dt>
+              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
+                {project.description}
+              </dd>
+              <dt className="sr-only">Year</dt>
+              <dd className="ml-auto text-xs text-zinc-400 dark:text-zinc-500">
+                {project.year}
+              </dd>
+            </dl>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
 function Photos() {
   let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
 
@@ -276,7 +367,7 @@ export default function Home({ articles }) {
   return (
     <>
       <Head>
-        <title>Victoria Jordan - Leader, artist, and frontend enthusiast</title>
+        <title>Marty Markenson</title>
         <meta
           name="description"
           content="I'm Victoria Jordan. A leader, artist, and frontend enthusiast"
@@ -285,51 +376,43 @@ export default function Home({ articles }) {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Leader, artist, and frontend enthusiast in Austin, TX.
+            Product manager and vibecoder in Burlington, VT.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m Victoria, a computer science student and the Founder and
-            President of Girls Who Code at Texas State University. I am
-            passionate about frontend engineering, empowering women in tech, and
-            creating inclusive spaces for beginners in computer science.
+            I&apos;m Marty, a product manager, technology builder and
+            photographer in Burlington, VT. I am
+            passionate about building well designed products, and
+            building a local tech community.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
-              href="https://github.com/vjordan-cs"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="https://linkedin.com/in/victoria-jordan01/"
+              href="https://www.linkedin.com/in/marty-markenson-08b79058/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
             />
-
-            {/* <SocialLink
-              href="https://www.instagram.com/vjordan.cs/"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            /> */}
-            {/* <SocialLink
-              href="https://twitter.com/cs__victoria"
-              aria-label="Follow on Twitter"
+            <SocialLink
+              href="https://twitter.com/martymarkenson"
+              aria-label="Follow on X"
               icon={TwitterIcon}
-            /> */}
+            />
+            <SocialLink
+              href="https://martymarkenson.substack.com"
+              aria-label="Follow on Substack"
+              icon={SubstackIcon}
+            />
+            <SocialLink
+              href="https://github.com/martymarkenson"
+              aria-label="Follow on GitHub"
+              icon={GitHubIcon}
+            />
           </div>
         </div>
       </Container>
       <Photos />
       <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          {/* <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
-          </div> */}
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            {/* <Newsletter /> */}
-            <Resume />
-          </div>
+        <div className="mx-auto max-w-xl space-y-10">
+          <Projects />
+          <Resume />
         </div>
       </Container>
     </>
