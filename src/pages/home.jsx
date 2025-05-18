@@ -23,6 +23,10 @@ import logoCS from '@/images/logos/codingscape_logo.jpeg'
 import logoOutliant from '@/images/logos/outliant_logo.jpeg'
 import logoMakerbot from '@/images/logos/makerbot_logo.jpg'
 import logoCognizant from '@/images/logos/cognizant_logo.jpeg'
+import logoVibe from '@/images/logos/vibemetaverse_logo.jpg'
+import logoRecipe from '@/images/logos/recipesaver_logo.png'
+import logoBidtreat from '@/images/logos/bidtreat_logo.png'
+import logoCavelit from '@/images/logos/cavelit_logo.jpg'
 
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
@@ -264,23 +268,31 @@ function Projects() {
   let projects = [
     {
       name: 'The Vibemetaverse',
-      description: 'Vibe coded multiplayer metaverse to jump through 3js games. Keep your avatar / name',
-      year: 'April 2025',
+      description: 'Vibecoded multiplayer metaverse that reached 200 daily users. Jump through 3D games with friends. Keep your avatar / name',
+      year: 'Apr 2025',
+      href: 'https://thevibemetaverse.com',
+      logo: logoVibe,
     },
     {
       name: 'Receipe Saver',
       description: 'Save online receipes and ingredients from a link. Skip all the ads, lifestories and pop-ups',
-      year: 'March 2025',
+      year: 'Mar 2025',
+      href: 'https://receipesaver.com',
+      logo: logoRecipe,
     },
     {
       name: 'Bidtreat.com',
       description: 'Save up to 75% on luxury travel with weekly emails of the best vacations from charity auctions.',
-      year: '2024',
+      year: 'Dec 2024',
+      href: 'https://bidtreat.com',
+      logo: logoBidtreat,
     },
     {
       name: 'Cavelit',
       description: 'AI powered video script generator and editor for realtors.',
       year: '2020-2024',
+      href: 'https://cavelit.com',
+      logo: logoCavelit,
     },
   ]
 
@@ -294,12 +306,19 @@ function Projects() {
         {projects.map((project, projectIndex) => (
           <li key={projectIndex} className="flex gap-4">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <CodeIcon className="h-6 w-6 text-zinc-400 dark:text-zinc-500" />
+              <Image
+                src={project.logo}
+                alt=""
+                className="h-7 w-7 rounded-full"
+                unoptimized
+              />
             </div>
             <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Project</dt>
               <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                {project.name}
+                <Link href={project.href} className="hover:text-teal-500 transition-colors">
+                  {project.name}
+                </Link>
               </dd>
               <dt className="sr-only">Description</dt>
               <dd className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -391,13 +410,9 @@ export default function Home({ articles }) {
       </Container>
       <Photos />
       <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="space-y-10">
-            <Resume />
-          </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Projects />
-          </div>
+        <div className="mx-auto max-w-xl space-y-10">
+          <Projects />
+          <Resume />
         </div>
       </Container>
     </>
