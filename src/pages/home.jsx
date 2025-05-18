@@ -276,7 +276,7 @@ export default function Home({ articles }) {
   return (
     <>
       <Head>
-        <title>Victoria Jordan - Leader, artist, and frontend enthusiast</title>
+        <title>Marty Markenson</title>
         <meta
           name="description"
           content="I'm Victoria Jordan. A leader, artist, and frontend enthusiast"
@@ -285,13 +285,13 @@ export default function Home({ articles }) {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Leader, artist, and frontend enthusiast in Austin, TX.
+            Software, product, and vibecoder in Burlington, VT.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m Victoria, a computer science student and the Founder and
-            President of Girls Who Code at Texas State University. I am
-            passionate about frontend engineering, empowering women in tech, and
-            creating inclusive spaces for beginners in computer science.
+            I&apos;m Marty, a product manager, technology builder and
+            photographer in Burlington, VT. I am
+            passionate about building well designed products, and
+            building a local tech community.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
