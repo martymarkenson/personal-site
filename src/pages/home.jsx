@@ -17,12 +17,11 @@ import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
-import logoDell from '@/images/logos/dell.svg'
-import logoFYPM from '@/images/logos/fypm1.svg'
-import logoGWC from '@/images/logos/gwcLogo1.png'
-import logoTXST from '@/images/logos/txstStar.png'
-import halcyoncore from '@/images/logos/hc-logo.png'
-import amazonIcon from '@/images/logos/amazonlogo.png'
+import logoPTC from '@/images/logos/ptcinc_logo.jpeg'
+import logoCS from '@/images/logos/codingscape_logo.jpeg'
+import logoOutliant from '@/images/logos/outliant_logo.jpeg'
+import logoMakerbot from '@/images/logos/makerbot_logo.jpg'
+import logoCognizant from '@/images/logos/cognizant_logo.jpeg'
 
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
@@ -142,53 +141,39 @@ function Newsletter() {
 function Resume() {
   let resume = [
     {
-      company: 'Amazon',
-      title: 'Software Engineering Intern',
-      logo: amazonIcon,
-      start: 'May 2023',
-      end: 'Aug 2023',
-    },
-    {
-      company: 'HalcyonCore',
-      title: 'Co-Founder & Lead Engineer',
-      logo: halcyoncore,
-      start: 'March 2023',
+      company: 'Codingscape',
+      title: 'Product Manager',
+      logo: logoCS,
+      start: 'Feb 2025',
       end: 'Present',
     },
     {
-      company: 'Texas State VR Lab',
-      title: 'Virtual Reality Researcher',
-      logo: logoTXST,
-      start: 'Jan 2023',
-      end: 'Present',
+      company: 'Outliant',
+      title: 'Contract Product Manager',
+      logo: logoOutliant,
+      start: 'Jan 2024',
+      end: 'May 2024',
     },
     {
-      company: 'Girls Who Code TXST',
-      title: 'Founder & President',
-      logo: logoGWC,
-      start: 'Feb 2022',
-      end: 'Present',
+      company: 'Makerbot',
+      title: 'Contract Product Manager',
+      logo: logoMakerbot,
+      start: 'Jan 2022',
+      end: 'March 2023',
     },
     {
-      company: 'FYPM App',
-      title: 'Front End Engineer Intern',
-      logo: logoFYPM,
-      start: 'April 2022',
-      end: 'July 2022',
+      company: 'PTC',
+      title: 'AR/VR Product Manager',
+      logo: logoPTC,
+      start: 'Dec 2016',
+      end: 'Dec 2021',
     },
     {
-      company: 'Dell Technologies',
-      title: 'Software Engineer Intern',
-      logo: logoDell,
-      start: 'June 2022',
-      end: 'Aug 2022',
-    },
-    {
-      company: 'Dell Technologies',
-      title: 'Software Engineer Intern',
-      logo: logoDell,
-      start: 'May 2021',
-      end: 'Aug 2021',
+      company: 'Cognizant',
+      title: 'QA Analyst',
+      logo: logoCognizant,
+      start: 'Aug 2015',
+      end: 'Mar 2016',
     },
   ]
 
