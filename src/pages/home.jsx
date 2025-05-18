@@ -28,6 +28,7 @@ import logoRecipe from '@/images/logos/recipesaver_logo.png'
 import logoBidtreat from '@/images/logos/bidtreat_logo.png'
 import logoCavelit from '@/images/logos/cavelit_logo.jpg'
 import logoLinktodonate from '@/images/logos/linktodonate_logo.jpg'
+import logoVermontTechMeetup from '@/images/logos/meetup_logo.png'
 
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
@@ -296,9 +297,16 @@ function Projects() {
       logo: logoBidtreat,
     },
     {
+      name: 'Vermont Tech Meetup',
+      description: 'Organizer of the Vermont Tech Meetup, a monthly meetup for techies in Vermont.',
+      year: 'Mar 2022',
+      href: 'https://www.meetup.com/vermont-tech-meetup/',
+      logo: logoVermontTechMeetup,
+    },
+    {
       name: 'Cavelit',
       description: 'AI powered video script generator and editor for realtors.',
-      year: 'Jul 2024',
+      year: 'Jul 2020',
       href: 'https://martymarkenson.substack.com/p/i-shut-down-my-online-business',
       logo: logoCavelit,
     },
@@ -384,11 +392,11 @@ export default function Home({ articles }) {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Product manager and vibecoder in Burlington, VT.
+            Product Manager and Vibecoder in Burlington, VT.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I&apos;m Marty, a product manager, technology builder and
-            photographer in Burlington, VT. I am
+            meetup organizer in Burlington, VT. I am
             passionate about building well designed products, and
             building a local tech community.
           </p>
