@@ -127,7 +127,7 @@ function Hero() {
             aria-hidden="true"
           />
         </span>.<br/>I&apos;ll ship it in <span className="relative inline-block">
-          <span className="relative z-10 text-red-500">6 weeks</span>
+          <span className="relative z-10">6 weeks</span>
           <Image
             src={underline}
             className="pointer-events-none absolute left-[55%] -translate-x-1/2 -bottom-10 w-[140px] h-auto mix-blend-multiply"
@@ -149,9 +149,20 @@ function Hero() {
         <div className="mt-8">
           <Button
             href="#contact-form"
-            className="bg-red-500 hover:bg-red-600 text-white border-red-500 hover:border-red-600 flex items-center justify-center gap-2 text-lg font-semibold px-10 py-4 shadow-md shadow-zinc-800/5"
+            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-300 hover:!bg-white hover:text-black hover:!border-red-500 active:text-black group"
+            style={{ letterSpacing: '0.15em' }}
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('contact-form').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }}
           >
-             Let&apos;s talk specifics<span aria-hidden="true">&rarr;</span>
+            let&apos;s talk specifics
+            <span className="transition-colors duration-300 group-hover:text-black text-white">
+              &rarr;
+            </span>
           </Button>
         </div>
       </div>
@@ -477,7 +488,7 @@ function ContactForm() {
         </p>
         <Button 
           onClick={() => setIsSubmitted(false)}
-          className="mt-4 bg-red-500 hover:bg-red-600 text-white border-red-500 hover:border-red-600"
+          className="mt-4 !bg-red-500 !hover:bg-red-600 !text-white !border-2 !border-black px-6 py-3"
         >
           Send another message
         </Button>
@@ -536,9 +547,10 @@ function ContactForm() {
           className="w-full appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-red-400 dark:focus:ring-red-400/10 sm:text-sm resize-none disabled:opacity-50 disabled:cursor-not-allowed"
         />
         <div className="flex justify-start">
-          <Button 
-            type="submit" 
-            className="flex-none bg-red-500 hover:bg-red-600 text-white border-red-500 hover:border-red-600"
+          <Button
+            type="submit"
+            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-300 hover:!bg-white hover:text-black hover:!border-red-500 active:text-black flex-none"
+            style={{ letterSpacing: '0.15em' }}
             disabled={isSubmitting}
           >
             {isSubmitting ? (
@@ -586,23 +598,6 @@ export default function Codingscape() {
             </div>
           </div>
         </Container>
-        
-        {/* Footer */}
-        <footer className="mt-32 border-t border-zinc-100 dark:border-zinc-700/40">
-          <Container className="py-16">
-            <div className="flex items-center justify-center gap-3">
-              <Image
-                src={logoCS}
-                alt="Codingscape"
-                className="h-6 w-6 rounded-full"
-                unoptimized
-              />
-              <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                &copy; {new Date().getFullYear()} Marty Markenson. All rights reserved.
-              </span>
-            </div>
-          </Container>
-        </footer>
       </div>
     </>
   )

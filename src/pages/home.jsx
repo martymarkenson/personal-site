@@ -36,6 +36,7 @@ import cross from '@/images/cross-2.svg'
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
+import { Footer } from '@/components/Footer'
 
 function MailIcon(props) {
   return (
@@ -587,23 +588,7 @@ export default function Home({ articles }) {
             </div>
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-          Your team said <span className="relative inline-block">
-            <span className="relative z-0">6 months</span>
-            <Image
-              src={cross}
-              className="pointer-events-none absolute left-[18%] -bottom-7 sm:-bottom-9 w-[120px] sm:w-[160px] h-auto z-50"
-              alt=""
-              aria-hidden="true"
-            />
-          </span>.<br/>I&apos;ll ship it in <span className="relative inline-block">
-            <span className="relative z-10">6 weeks</span>
-            <Image
-              src={underline}
-              className="pointer-events-none absolute left-[55%] -translate-x-1/2 -bottom-10 w-[140px] h-auto mix-blend-multiply"
-              alt=""
-              aria-hidden="true"
-            />
-          </span>.
+            Your team said <span className="relative inline-block">6 months</span>.<br/>I&apos;ll ship it in <span className="relative inline-block">6 weeks</span>.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I&apos;m Marty, a product manager who writes code. I&apos;ll figure out what your users actually need and build software that fits into your roadmap.
@@ -634,6 +619,7 @@ export default function Home({ articles }) {
           </div>
         </div>
       </Container>
+      <Footer />
     </>
   )
 }
