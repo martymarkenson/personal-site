@@ -92,11 +92,20 @@ function CodingscapeHeader() {
             </div>
           </div>
           <div className="flex flex-1 justify-end">
-            <nav className="flex items-center gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-              <Link href="/" className="hover:text-red-500 transition-colors">
-                Personal Site
-              </Link>
-            </nav>
+            <div className="flex items-center gap-4">
+              <a href="https://www.linkedin.com/in/marty-markenson-08b79058/" aria-label="LinkedIn" className="text-zinc-500 hover:text-red-500 transition">
+                <LinkedInIcon className="h-5 w-5" />
+              </a>
+              <a href="https://twitter.com/martymarkenson" aria-label="X" className="text-zinc-500 hover:text-red-500 transition">
+                <TwitterIcon className="h-5 w-5" />
+              </a>
+              <a href="https://martymarkenson.substack.com" aria-label="Substack" className="text-zinc-500 hover:text-red-500 transition">
+                <SubstackIcon className="h-5 w-5" />
+              </a>
+              <a href="https://github.com/martymarkenson" aria-label="GitHub" className="text-zinc-500 hover:text-red-500 transition">
+                <GitHubIcon className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
       </Container>
@@ -106,7 +115,7 @@ function CodingscapeHeader() {
 
 function Hero() {
   return (
-    <Container className="mt-16 sm:mt-32">
+    <Container className="mt-8 sm:mt-12">
       <div className="max-w-2xl">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
         Your team said <span className="relative inline-block">
@@ -581,32 +590,16 @@ export default function Codingscape() {
         {/* Footer */}
         <footer className="mt-32 border-t border-zinc-100 dark:border-zinc-700/40">
           <Container className="py-16">
-            <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-              <div className="flex items-center gap-3">
-                <Image
-                  src={logoCS}
-                  alt="Codingscape"
-                  className="h-6 w-6 rounded-full"
-                  unoptimized
-                />
-                <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                  &copy; {new Date().getFullYear()} Marty Markenson. All rights reserved.
-                </span>
-              </div>
-              <div className="flex justify-center gap-4">
-                <a href="https://www.linkedin.com/in/marty-markenson-08b79058/" aria-label="LinkedIn" className="rounded-full border border-zinc-200 dark:border-zinc-700 w-10 h-10 flex items-center justify-center transition hover:border-red-500">
-                  <LinkedInIcon className="h-5 w-5 text-zinc-500 hover:text-red-500 transition" />
-                </a>
-                <a href="https://twitter.com/martymarkenson" aria-label="X" className="rounded-full border border-zinc-200 dark:border-zinc-700 w-10 h-10 flex items-center justify-center transition hover:border-red-500">
-                  <TwitterIcon className="h-5 w-5 text-zinc-500 hover:text-red-500 transition" />
-                </a>
-                <a href="https://martymarkenson.substack.com" aria-label="Substack" className="rounded-full border border-zinc-200 dark:border-zinc-700 w-10 h-10 flex items-center justify-center transition hover:border-red-500">
-                  <SubstackIcon className="h-5 w-5 text-zinc-500 hover:text-red-500 transition" />
-                </a>
-                <a href="https://github.com/martymarkenson" aria-label="GitHub" className="rounded-full border border-zinc-200 dark:border-zinc-700 w-10 h-10 flex items-center justify-center transition hover:border-red-500">
-                  <GitHubIcon className="h-5 w-5 text-zinc-500 hover:text-red-500 transition" />
-                </a>
-              </div>
+            <div className="flex items-center justify-center gap-3">
+              <Image
+                src={logoCS}
+                alt="Codingscape"
+                className="h-6 w-6 rounded-full"
+                unoptimized
+              />
+              <span className="text-sm text-zinc-500 dark:text-zinc-400">
+                &copy; {new Date().getFullYear()} Marty Markenson. All rights reserved.
+              </span>
             </div>
           </Container>
         </footer>
