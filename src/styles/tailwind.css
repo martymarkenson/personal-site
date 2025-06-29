@@ -3,6 +3,11 @@
 @import './prism.css';
 @import 'tailwindcss/utilities';
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Gradient Depth CTA Button */
 .gradient-depth {
     display: inline-block;

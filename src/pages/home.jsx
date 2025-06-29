@@ -2,6 +2,7 @@ import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
 import clsx from 'clsx'
+import { useState } from 'react'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
@@ -90,6 +91,44 @@ function ArrowDownIcon(props) {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function MessageIcon(props) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+      />
+    </svg>
+  )
+}
+
+function SendIcon(props) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M5 12h14M12 5l7 7-7 7"
+        className="stroke-current"
       />
     </svg>
   )
@@ -200,7 +239,7 @@ function Resume() {
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Let's talk specifics</span>
+        <span className="ml-3">Work Experience</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
@@ -354,6 +393,143 @@ function Projects() {
   )
 }
 
+function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError('')
+
+    const formData = new FormData(e.target)
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+    }
+
+    try {
+      const response = await fetch('https://submit-form.com/Yl4JDoOAD', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (response.ok) {
+        setIsSubmitted(true)
+        e.target.reset()
+      } else {
+        throw new Error('Failed to submit form')
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (isSubmitted) {
+    return (
+      <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+          <MailIcon className="h-6 w-6 flex-none" />
+          <span className="ml-3">Message sent!</span>
+        </h2>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+          Thank you for reaching out. I&apos;ll get back to you soon!
+        </p>
+        <Button 
+          onClick={() => setIsSubmitted(false)}
+          className="mt-4"
+        >
+          Send another message
+        </Button>
+      </div>
+    )
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+    >
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <MailIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Get in touch</span>
+      </h2>
+      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        Have a project in mind? Let&apos;s discuss how I can help bring your ideas to life.
+      </p>
+      {error && (
+        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800">
+          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        </div>
+      )}
+      <div className="mt-6 space-y-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            aria-label="Name"
+            required
+            disabled={isSubmitting}
+            className="min-w-0 appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email address"
+            aria-label="Email address"
+            required
+            disabled={isSubmitting}
+            className="min-w-0 appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          />
+        </div>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Tell me about your project..."
+          aria-label="Message"
+          required
+          rows={4}
+          disabled={isSubmitting}
+          className="w-full appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+        />
+        <div className="flex justify-start">
+          <Button 
+            type="submit" 
+            className="flex-none"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Sending...
+              </>
+            ) : (
+              <>
+                Send message
+                <SendIcon className="h-4 w-4 ml-1" />
+              </>
+            )}
+          </Button>
+        </div>
+      </div>
+    </form>
+  )
+}
+
 function Photos() {
   let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
 
@@ -434,10 +610,10 @@ export default function Home({ articles }) {
           </p>
           <div className="mt-8">
             <Button
-              href="mailto:marty@martymarkenson.com"
+              href="#contact-form"
               className="flex items-center justify-center gap-2 text-lg font-semibold px-10 py-4 shadow-md shadow-zinc-800/5"
             >
-               Let's talk specifics<span aria-hidden="true">&rarr;</span>
+               Let&apos;s talk specifics<span aria-hidden="true">&rarr;</span>
             </Button>
           </div>
         </div>
@@ -447,6 +623,9 @@ export default function Home({ articles }) {
         <div className="mx-auto max-w-xl space-y-10">
           <Projects />
           <Resume />
+          <div id="contact-form">
+            <ContactForm />
+          </div>
         </div>
       </Container>
     </>
