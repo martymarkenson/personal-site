@@ -521,7 +521,7 @@ function ContactForm() {
             ) : (
               <>
                 Send message
-                <SendIcon className="h-4 w-4 ml-1" />
+                <SendIcon className="arrow-icon h-4 w-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" />
               </>
             )}
           </Button>
@@ -604,7 +604,7 @@ export default function Home({ articles }) {
               href="#contact-form"
               className="flex items-center justify-center gap-2 text-lg font-semibold px-10 py-4 shadow-md shadow-zinc-800/5"
             >
-               Let&apos;s talk specifics<span aria-hidden="true">&rarr;</span>
+               Let&apos;s talk specifics<SendIcon className="arrow-icon h-5 w-5 ml-2 transition-transform duration-500 ease-out group-hover:translate-x-1" />
             </Button>
           </div>
         </div>

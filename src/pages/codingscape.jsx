@@ -149,7 +149,7 @@ function Hero() {
         <div className="mt-8">
           <Button
             href="#contact-form"
-            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-300 hover:!bg-white hover:text-black hover:!border-red-500 active:text-black group"
+            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-500 ease-out hover:!bg-white hover:text-black hover:!border-red-500 active:text-black group"
             style={{ letterSpacing: '0.15em' }}
             onClick={(e) => {
               e.preventDefault();
@@ -160,9 +160,7 @@ function Hero() {
             }}
           >
             let&apos;s talk specifics
-            <span className="transition-colors duration-300 group-hover:text-black text-white">
-              &rarr;
-            </span>
+            <SendIcon className="arrow-icon h-5 w-5 ml-2 transition-all duration-500 ease-out group-hover:text-black text-white" />
           </Button>
         </div>
       </div>

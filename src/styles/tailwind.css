@@ -51,3 +51,39 @@ html {
     box-shadow: 0 12px 28px rgba(0,0,0,0.18), 
                 0 4px 12px rgba(0,0,0,0.12);
 }
+
+/* Arrow hover animations */
+.arrow {
+    margin-left: 8px;
+    font-size: 18px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover animation - moves arrow to the right */
+.group:hover .arrow,
+button:hover .arrow,
+a:hover .arrow {
+    transform: translateX(3px);
+}
+
+/* Alternative: If you want a slightly more pronounced movement */
+.group:hover .arrow-pronounced,
+button:hover .arrow-pronounced,
+a:hover .arrow-pronounced {
+    transform: translateX(5px);
+}
+
+/* For SVG arrow icons */
+.group:hover .arrow-icon,
+button:hover .arrow-icon,
+a:hover .arrow-icon {
+    transform: translateX(3px);
+}
+
+/* For the specific arrow character used in buttons */
+.group:hover span:last-child,
+button:hover span:last-child,
+a:hover span:last-child {
+    transform: translateX(3px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
