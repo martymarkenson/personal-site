@@ -7,10 +7,6 @@ const nextConfig = {
   pageExtensions: ['jsx', 'mdx'],
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    newNextLinkBehavior: true,
-    scrollRestoration: true,
-  },
   async redirects() {
     return [
       {
