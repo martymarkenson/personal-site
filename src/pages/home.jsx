@@ -565,7 +565,7 @@ export default function Home({ articles }) {
         <title>Marty Markenson</title>
         <meta
           name="description"
-          content="I'm Victoria Jordan. A leader, artist, and frontend enthusiast"
+          content="I'm Marty Markenson. A product manager who writes code, building software that fits into your roadmap."
         />
       </Head>
       <Container className="mt-9">
