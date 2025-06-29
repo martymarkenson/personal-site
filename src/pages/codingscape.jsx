@@ -86,7 +86,7 @@ function CodingscapeHeader() {
                 className="h-8 w-8 rounded-full"
                 unoptimized
               />
-              <span className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+              <span className="text-xl font-bold text-zinc-900 dark:text-zinc-100 whitespace-nowrap">
                 Codingscape <span className="text-red-500">×</span> Marty Markenson
               </span>
             </div>
@@ -108,23 +108,6 @@ function Hero() {
   return (
     <Container className="mt-16 sm:mt-32">
       <div className="max-w-2xl">
-        <div className="mb-8 flex items-center justify-between w-full">
-          <div className="text-zinc-800 dark:text-zinc-100 font-semibold text-base">Marty Markenson</div>
-          <div className="flex gap-3">
-            <a href="https://www.linkedin.com/in/marty-markenson-08b79058/" aria-label="LinkedIn">
-              <LinkedInIcon className="h-4 w-4 text-zinc-500 hover:text-red-500 transition" />
-            </a>
-            <a href="https://twitter.com/martymarkenson" aria-label="X">
-              <TwitterIcon className="h-4 w-4 text-zinc-500 hover:text-red-500 transition" />
-            </a>
-            <a href="https://martymarkenson.substack.com" aria-label="Substack">
-              <SubstackIcon className="h-4 w-4 text-zinc-500 hover:text-red-500 transition" />
-            </a>
-            <a href="https://github.com/martymarkenson" aria-label="GitHub">
-              <GitHubIcon className="h-4 w-4 text-zinc-500 hover:text-red-500 transition" />
-            </a>
-          </div>
-        </div>
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
         Your team said <span className="relative inline-block">
           <span className="relative z-0">6 months</span>
