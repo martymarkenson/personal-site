@@ -79,17 +79,17 @@ function CodingscapeHeader() {
       <Container className="top-0 z-10 h-16 pt-6">
         <div className="relative flex gap-4">
           <div className="flex flex-1 items-center">
-            <Link href="/" className="flex items-center gap-3 group">
+            <div className="flex items-center gap-3">
               <Image
                 src={logoCS}
                 alt="Codingscape"
                 className="h-8 w-8 rounded-full"
                 unoptimized
               />
-              <span className="text-xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-red-500 transition-colors">
-                codingscape
+              <span className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+                Codingscape <span className="text-red-500">×</span> Marty Markenson
               </span>
-            </Link>
+            </div>
           </div>
           <div className="flex flex-1 justify-end">
             <nav className="flex items-center gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200">
@@ -607,11 +607,22 @@ export default function Codingscape() {
                   unoptimized
                 />
                 <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                  &copy; {new Date().getFullYear()} Codingscape. Built by{' '}
-                  <Link href="/" className="text-red-500 hover:text-red-600 transition-colors">
-                    Marty Markenson
-                  </Link>
+                  &copy; {new Date().getFullYear()} Marty Markenson. All rights reserved.
                 </span>
+              </div>
+              <div className="flex justify-center gap-4">
+                <a href="https://www.linkedin.com/in/marty-markenson-08b79058/" aria-label="LinkedIn" className="rounded-full border border-zinc-200 dark:border-zinc-700 w-10 h-10 flex items-center justify-center transition hover:border-red-500">
+                  <LinkedInIcon className="h-5 w-5 text-zinc-500 hover:text-red-500 transition" />
+                </a>
+                <a href="https://twitter.com/martymarkenson" aria-label="X" className="rounded-full border border-zinc-200 dark:border-zinc-700 w-10 h-10 flex items-center justify-center transition hover:border-red-500">
+                  <TwitterIcon className="h-5 w-5 text-zinc-500 hover:text-red-500 transition" />
+                </a>
+                <a href="https://martymarkenson.substack.com" aria-label="Substack" className="rounded-full border border-zinc-200 dark:border-zinc-700 w-10 h-10 flex items-center justify-center transition hover:border-red-500">
+                  <SubstackIcon className="h-5 w-5 text-zinc-500 hover:text-red-500 transition" />
+                </a>
+                <a href="https://github.com/martymarkenson" aria-label="GitHub" className="rounded-full border border-zinc-200 dark:border-zinc-700 w-10 h-10 flex items-center justify-center transition hover:border-red-500">
+                  <GitHubIcon className="h-5 w-5 text-zinc-500 hover:text-red-500 transition" />
+                </a>
               </div>
             </div>
           </Container>
