@@ -29,6 +29,8 @@ import logoBidtreat from '@/images/logos/bidtreat_logo.png'
 import logoCavelit from '@/images/logos/cavelit_logo.jpg'
 import logoLinktodonate from '@/images/logos/linktodonate_logo.jpg'
 import logoVermontTechMeetup from '@/images/logos/meetup_logo.png'
+import underline from '@/images/underline.svg'
+import cross from '@/images/cross-2.svg'
 
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
@@ -198,7 +200,7 @@ function Resume() {
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
+        <span className="ml-3">Let's talk specifics</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
@@ -391,21 +393,51 @@ export default function Home({ articles }) {
       </Head>
       <Container className="mt-9">
         <div className="max-w-2xl">
+          <div className="mb-8 flex items-center justify-between w-full">
+            <div className="text-zinc-800 dark:text-zinc-100 font-semibold text-base">Marty Markenson</div>
+            <div className="flex gap-3">
+              <a href="https://www.linkedin.com/in/marty-markenson-08b79058/" aria-label="LinkedIn">
+                <LinkedInIcon className="h-4 w-4 text-zinc-500 hover:text-[#0077b5] transition" />
+              </a>
+              <a href="https://twitter.com/martymarkenson" aria-label="X">
+                <TwitterIcon className="h-4 w-4 text-zinc-500 hover:text-[#1DA1F2] transition" />
+              </a>
+              <a href="https://martymarkenson.substack.com" aria-label="Substack">
+                <SubstackIcon className="h-4 w-4 text-zinc-500 hover:text-[#FF6719] transition" />
+              </a>
+              <a href="https://github.com/martymarkenson" aria-label="GitHub">
+                <GitHubIcon className="h-4 w-4 text-zinc-500 hover:text-purple-500 transition" />
+              </a>
+            </div>
+          </div>
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Product Manager and Vibecoder in Burlington, VT.
+          Your team said <span className="relative inline-block">
+            <span className="relative z-0">6 months</span>
+            <Image
+              src={cross}
+              className="pointer-events-none absolute left-[18%] -bottom-9 w-[160px] h-auto z-50"
+              alt=""
+              aria-hidden="true"
+            />
+          </span>.<br/>I&apos;ll ship it in <span className="relative inline-block">
+            <span className="relative z-10">6 weeks</span>
+            <Image
+              src={underline}
+              className="pointer-events-none absolute left-[55%] -translate-x-1/2 -bottom-10 w-[140px] h-auto mix-blend-multiply"
+              alt=""
+              aria-hidden="true"
+            />
+          </span>.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m Marty, a product manager, technology builder and
-            meetup organizer in Burlington, VT. I am
-            passionate about building well designed products, and
-            building a local tech community.
+            I&apos;m Marty, a product manager who codes. When internal teams are blocked, I step in and deliver working software in weeks using AI tools to deliver production ready code your team can maintain.
           </p>
           <div className="mt-8">
             <Button
               href="mailto:marty@martymarkenson.com"
-              className="w-full py-8 text-2xl font-semibold flex items-center justify-center gap-3"
+              className="flex items-center justify-center gap-2 text-lg font-semibold px-10 py-4 shadow-md shadow-zinc-800/5"
             >
-              Work With Me <span aria-hidden="true">&rarr;</span>
+               Let's talk specifics<span aria-hidden="true">&rarr;</span>
             </Button>
           </div>
         </div>

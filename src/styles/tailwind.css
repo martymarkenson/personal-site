@@ -2,3 +2,47 @@
 @import 'tailwindcss/components';
 @import './prism.css';
 @import 'tailwindcss/utilities';
+
+/* Gradient Depth CTA Button */
+.gradient-depth {
+    display: inline-block;
+    background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+    color: white;
+    padding: 18px 44px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15), 
+                0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.gradient-depth::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #444 0%, #2a2a2a 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gradient-depth span {
+    position: relative;
+    z-index: 1;
+}
+
+.gradient-depth:hover::before {
+    opacity: 1;
+}
+
+.gradient-depth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18), 
+                0 4px 12px rgba(0,0,0,0.12);
+}
