@@ -606,7 +606,13 @@ export default function Home({ articles }) {
           </span>.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m Marty, a product manager who codes. When internal teams are blocked, I step in and deliver working software in weeks using AI tools to deliver production ready code your team can maintain.
+            I&apos;m Marty, a product manager who writes code. I&apos;ll figure out what your users actually need and build software that fits into your roadmap.
+          </p>
+          <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+            Every week you&apos;ll see working software, not presentations.
+          </p>
+          <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+            With 10 years of experience building for billion dollar companies and startups, you&apos;ll get production ready software (NextJS and Vercel) so your team can maintain it.
           </p>
           <div className="mt-8">
             <Button
