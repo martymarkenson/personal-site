@@ -36,6 +36,7 @@ import cross from '@/images/cross-2.svg'
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
+import { Footer } from '@/components/Footer'
 
 function MailIcon(props) {
   return (
@@ -520,7 +521,7 @@ function ContactForm() {
             ) : (
               <>
                 Send message
-                <SendIcon className="h-4 w-4 ml-1" />
+                <SendIcon className="arrow-icon h-4 w-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" />
               </>
             )}
           </Button>
@@ -564,7 +565,7 @@ export default function Home({ articles }) {
         <title>Marty Markenson</title>
         <meta
           name="description"
-          content="I'm Victoria Jordan. A leader, artist, and frontend enthusiast"
+          content="I'm Marty Markenson. A product manager who writes code, building software that fits into your roadmap."
         />
       </Head>
       <Container className="mt-9">
@@ -587,23 +588,7 @@ export default function Home({ articles }) {
             </div>
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-          Your team said <span className="relative inline-block">
-            <span className="relative z-0">6 months</span>
-            <Image
-              src={cross}
-              className="pointer-events-none absolute left-[18%] -bottom-7 sm:-bottom-9 w-[120px] sm:w-[160px] h-auto z-50"
-              alt=""
-              aria-hidden="true"
-            />
-          </span>.<br/>I&apos;ll ship it in <span className="relative inline-block">
-            <span className="relative z-10">6 weeks</span>
-            <Image
-              src={underline}
-              className="pointer-events-none absolute left-[55%] -translate-x-1/2 -bottom-10 w-[140px] h-auto mix-blend-multiply"
-              alt=""
-              aria-hidden="true"
-            />
-          </span>.
+            Your team said <span className="relative inline-block">6 months</span>.<br/>I&apos;ll ship it in <span className="relative inline-block">6 weeks</span>.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I&apos;m Marty, a product manager who writes code. I&apos;ll figure out what your users actually need and build software that fits into your roadmap.
@@ -619,7 +604,7 @@ export default function Home({ articles }) {
               href="#contact-form"
               className="flex items-center justify-center gap-2 text-lg font-semibold px-10 py-4 shadow-md shadow-zinc-800/5"
             >
-               Let&apos;s talk specifics<span aria-hidden="true">&rarr;</span>
+               Let&apos;s talk specifics<SendIcon className="arrow-icon h-5 w-5 ml-2 transition-transform duration-500 ease-out group-hover:translate-x-1" />
             </Button>
           </div>
         </div>
@@ -634,6 +619,7 @@ export default function Home({ articles }) {
           </div>
         </div>
       </Container>
+      <Footer />
     </>
   )
 }

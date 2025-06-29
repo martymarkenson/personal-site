@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/future/image'
+import logoCS from '@/images/logos/codingscape_logo.jpeg'
 
 import { Container } from '@/components/Container'
 import { LinkedInIcon, TwitterIcon, SubstackIcon, GitHubIcon } from '@/components/SocialIcons'
@@ -18,7 +20,7 @@ export function Footer() {
   return (
     <footer className="mt-32">
       <Container.Outer>
-        <div className="border-t border-zinc-100 pt-10 pb-16 dark:border-zinc-700/40">
+        <div className="pt-10 pb-16">
           <Container.Inner>
             <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
               <div className="flex justify-center gap-4 mb-6">
@@ -35,10 +37,13 @@ export function Footer() {
                   <GitHubIcon className="h-5 w-5 text-zinc-500" />
                 </a>
               </div>
-              <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                &copy; {new Date().getFullYear()} Marty Markenson. All rights
-                reserved.
-              </p>
+              <div className="flex items-center gap-2">
+                <Image src={logoCS} alt="Codingscape" className="h-6 w-6 rounded-full" unoptimized />
+                <p className="text-sm text-zinc-400 dark:text-zinc-500">
+                  &copy; {new Date().getFullYear()} Marty Markenson. All rights
+                  reserved.
+                </p>
+              </div>
             </div>
           </Container.Inner>
         </div>
