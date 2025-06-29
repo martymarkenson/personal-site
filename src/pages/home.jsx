@@ -400,27 +400,13 @@ export default function Home({ articles }) {
             passionate about building well designed products, and
             building a local tech community.
           </p>
-          <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://www.linkedin.com/in/marty-markenson-08b79058/"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
-            <SocialLink
-              href="https://twitter.com/martymarkenson"
-              aria-label="Follow on X"
-              icon={TwitterIcon}
-            />
-            <SocialLink
-              href="https://martymarkenson.substack.com"
-              aria-label="Follow on Substack"
-              icon={SubstackIcon}
-            />
-            <SocialLink
-              href="https://github.com/martymarkenson"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
+          <div className="mt-8">
+            <Button
+              href="mailto:marty@martymarkenson.com"
+              className="w-full py-8 text-2xl font-semibold flex items-center justify-center gap-3"
+            >
+              Work With Me <span aria-hidden="true">&rarr;</span>
+            </Button>
           </div>
         </div>
       </Container>
