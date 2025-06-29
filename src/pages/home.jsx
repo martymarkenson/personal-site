@@ -591,7 +591,7 @@ export default function Home({ articles }) {
             <span className="relative z-0">6 months</span>
             <Image
               src={cross}
-              className="pointer-events-none absolute left-[18%] -bottom-9 w-[160px] h-auto z-50"
+              className="pointer-events-none absolute left-[18%] -bottom-7 w-[120px] sm:w-[160px] h-auto z-50"
               alt=""
               aria-hidden="true"
             />
