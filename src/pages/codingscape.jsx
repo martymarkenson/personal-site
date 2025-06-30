@@ -2,11 +2,12 @@ import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
+import { Header } from '@/components/Header'
 import {
   TwitterIcon,
   InstagramIcon,
@@ -73,56 +74,43 @@ function ArrowRightIcon(props) {
   )
 }
 
-function CodingscapeHeader() {
-  return (
-    <header className="relative z-50 flex flex-col">
-      <Container className="top-0 z-10 h-16 pt-6">
-        <div className="relative flex gap-4">
-          <div className="flex flex-1 items-center">
-            <div className="flex items-center gap-3">
-              <Image
-                src={logoCS}
-                alt="Codingscape"
-                className="h-8 w-8 rounded-full"
-                unoptimized
-              />
-              <span className="text-xl font-bold text-zinc-900 dark:text-zinc-100 whitespace-nowrap">
-                Codingscape <span className="text-red-500">×</span> Marty Markenson
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-1 justify-end">
-            <div className="flex items-center gap-4">
-              <a href="https://www.linkedin.com/in/marty-markenson-08b79058/" aria-label="LinkedIn" className="text-zinc-500 hover:text-red-500 transition">
-                <LinkedInIcon className="h-5 w-5" />
-              </a>
-              <a href="https://twitter.com/martymarkenson" aria-label="X" className="text-zinc-500 hover:text-red-500 transition">
-                <TwitterIcon className="h-5 w-5" />
-              </a>
-              <a href="https://martymarkenson.substack.com" aria-label="Substack" className="text-zinc-500 hover:text-red-500 transition">
-                <SubstackIcon className="h-5 w-5" />
-              </a>
-              <a href="https://github.com/martymarkenson" aria-label="GitHub" className="text-zinc-500 hover:text-red-500 transition">
-                <GitHubIcon className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </header>
-  )
-}
-
 function Hero() {
   return (
-    <Container className="mt-8 sm:mt-12">
+    <Container className="mt-9 w-full px-4">
       <div className="max-w-2xl">
+        <div className="mb-8 flex items-center justify-between w-full">
+          <div className="flex items-center gap-3">
+            <Image
+              src={logoCS}
+              alt="Codingscape"
+              className="h-8 w-8 rounded-full"
+              unoptimized
+            />
+            <span className="text-zinc-800 dark:text-zinc-100 font-semibold text-base whitespace-nowrap">
+              Codingscape <span className="text-red-500">×</span> Marty Markenson
+            </span>
+          </div>
+          <div className="flex gap-3">
+            <a href="https://www.linkedin.com/in/marty-markenson-08b79058/" aria-label="LinkedIn" className="text-zinc-500 hover:text-red-500 transition">
+              <LinkedInIcon className="h-4 w-4" />
+            </a>
+            <a href="https://twitter.com/martymarkenson" aria-label="X" className="text-zinc-500 hover:text-red-500 transition">
+              <TwitterIcon className="h-4 w-4" />
+            </a>
+            <a href="https://martymarkenson.substack.com" aria-label="Substack" className="text-zinc-500 hover:text-red-500 transition">
+              <SubstackIcon className="h-4 w-4" />
+            </a>
+            <a href="https://github.com/martymarkenson" aria-label="GitHub" className="text-zinc-500 hover:text-red-500 transition">
+              <GitHubIcon className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
         Your team said <span className="relative inline-block">
           <span className="relative z-0">6 months</span>
           <Image
             src={cross}
-            className="pointer-events-none absolute left-[18%] -bottom-7 sm:-bottom-9 w-[120px] sm:w-[160px] h-auto z-50"
+            className="pointer-events-none absolute left-1/4 sm:left-[18%] -bottom-7 sm:-bottom-9 w-[100px] sm:w-[160px] max-w-full h-auto z-50"
             alt=""
             aria-hidden="true"
           />
@@ -130,10 +118,9 @@ function Hero() {
           <span className="relative z-10">6 weeks</span>
           <Image
             src={underline}
-            className="pointer-events-none absolute left-[55%] -translate-x-1/2 -bottom-10 w-[140px] h-auto mix-blend-multiply"
+            className="pointer-events-none absolute left-1/2 sm:left-[55%] -translate-x-1/2 -bottom-8 sm:-bottom-10 w-[110px] sm:w-[140px] max-w-full h-auto"
             alt=""
             aria-hidden="true"
-            style={{ filter: 'hue-rotate(320deg) saturate(1.5)' }}
           />
         </span>.
         </h1>
@@ -573,6 +560,13 @@ function ContactForm() {
 }
 
 export default function Codingscape() {
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    return () => {
+      document.documentElement.classList.remove('dark');
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -582,9 +576,7 @@ export default function Codingscape() {
           content="I'm Marty, a product manager who writes code. I'll figure out what your users actually need and build software that fits into your roadmap."
         />
       </Head>
-      
-      <div className="min-h-screen bg-white dark:bg-zinc-900">
-        <CodingscapeHeader />
+      <div className="overflow-x-hidden">
         <Hero />
         <Photos />
         <Container className="mt-24 md:mt-28">
