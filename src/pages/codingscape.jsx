@@ -563,9 +563,16 @@ function ContactForm() {
 
 export default function Codingscape() {
   useEffect(() => {
+    // Force dark mode immediately to prevent flash
     document.documentElement.classList.add('dark');
+    // Set custom background color
+    document.documentElement.style.backgroundColor = '#00020E';
+    document.body.style.backgroundColor = '#00020E';
+    
     return () => {
       document.documentElement.classList.remove('dark');
+      document.documentElement.style.backgroundColor = '';
+      document.body.style.backgroundColor = '';
     };
   }, []);
 
@@ -577,8 +584,19 @@ export default function Codingscape() {
           name="description"
           content="I'm Marty, a product manager who writes code. I'll figure out what your users actually need and build software that fits into your roadmap."
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.backgroundColor = '#00020E';
+                document.body.style.backgroundColor = '#00020E';
+              })();
+            `,
+          }}
+        />
       </Head>
-      <div className="overflow-x-hidden">
+      <div className="overflow-x-hidden" style={{ backgroundColor: '#00020E' }}>
         <Hero />
         <Photos />
         <Container className="mt-24 md:mt-28">
