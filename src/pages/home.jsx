@@ -588,7 +588,26 @@ export default function Home({ articles }) {
             </div>
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Your team said <span className="relative inline-block">6 months</span>.<br/>I&apos;ll ship it in <span className="relative inline-block">6 weeks</span>.
+            <span className="whitespace-nowrap">
+              Your team said <span className="relative inline-block">
+                <span className="relative z-0">6 months</span>
+                <Image
+                  src={cross}
+                  className="pointer-events-none absolute left-1/4 sm:left-[18%] -bottom-6 sm:-bottom-9 w-[100px] sm:w-[160px] max-w-full h-auto z-50"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </span>.
+            </span><br/>
+            I&apos;ll ship it in <span className="relative inline-block">
+              <span className="relative z-10">6 weeks</span>
+              <Image
+                src={underline}
+                className="pointer-events-none absolute left-1/2 sm:left-[55%] -translate-x-1/2 -bottom-8 sm:-bottom-10 w-[110px] sm:w-[140px] max-w-full h-auto"
+                alt=""
+                aria-hidden="true"
+              />
+            </span>.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I&apos;m Marty, a product manager who writes code. I&apos;ll figure out what your users actually need and build software that fits into your roadmap.
