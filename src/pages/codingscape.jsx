@@ -90,7 +90,7 @@ function Hero() {
               Codingscape <span className="text-red-500">×</span> Marty Markenson
             </span>
           </div>
-          <div className="flex gap-3">
+          <div className="hidden sm:flex gap-3 mt-2 sm:mt-0">
             <a href="https://www.linkedin.com/in/marty-markenson-08b79058/" aria-label="LinkedIn" className="text-zinc-500 hover:text-red-500 transition">
               <LinkedInIcon className="h-4 w-4" />
             </a>
@@ -106,15 +106,17 @@ function Hero() {
           </div>
         </div>
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-        Your team said <span className="relative inline-block">
-          <span className="relative z-0">6 months</span>
-          <Image
-            src={cross}
-            className="pointer-events-none absolute left-1/4 sm:left-[18%] -bottom-7 sm:-bottom-9 w-[100px] sm:w-[160px] max-w-full h-auto z-50"
-            alt=""
-            aria-hidden="true"
-          />
-        </span>.<br/>I&apos;ll ship it in <span className="relative inline-block">
+          <span className="whitespace-nowrap">
+            Your team said <span className="relative inline-block">
+              <span className="relative z-0">6 months</span>
+              <Image
+                src={cross}
+                className="pointer-events-none absolute left-1/4 sm:left-[18%] -bottom-6 sm:-bottom-9 w-[100px] sm:w-[160px] max-w-full h-auto z-50"
+                alt=""
+                aria-hidden="true"
+              />
+            </span>.
+          </span><br/>I&apos;ll ship it in <span className="relative inline-block">
           <span className="relative z-10">6 weeks</span>
           <Image
             src={underline}
