@@ -293,7 +293,7 @@ export function WorkExperienceEditor({ experiences, onAdd, onUpdate, onDelete, o
         {experiences.length === 0 && !isAdding && (
           <div className="text-center py-8 text-zinc-500 dark:text-zinc-400">
             <p>No work experience added yet.</p>
-            <p className="text-sm">Click "Add Experience" to get started.</p>
+            <p className="text-sm">Click &quot;Add Experience&quot; to get started.</p>
           </div>
         )}
       </div>

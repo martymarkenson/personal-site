@@ -510,7 +510,7 @@ export default function UserProfile({ profileData, notFound }) {
                 Profile not found
               </h1>
               <p className="mt-6 text-base text-zinc-400">
-                The profile you're looking for doesn't exist.
+                The profile you&apos;re looking for doesn&apos;t exist.
               </p>
               <Button href="/" className="mt-8">
                 Go home

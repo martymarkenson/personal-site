@@ -87,7 +87,7 @@ export default function Signup() {
                 Check your email
               </h1>
               <p className="text-zinc-600 dark:text-zinc-400 mb-6">
-                We've sent you a confirmation link at <strong>{email}</strong>. 
+                We&apos;ve sent you a confirmation link at <strong>{email}</strong>. 
                 Click the link to verify your account and start building your profile.
               </p>
               <Link href="/login" className="text-teal-600 hover:text-teal-500 dark:text-teal-400">

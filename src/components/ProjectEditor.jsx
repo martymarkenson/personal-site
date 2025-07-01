@@ -268,7 +268,7 @@ export function ProjectEditor({ projects, onAdd, onUpdate, onDelete, onReorder, 
         {projects.length === 0 && !isAdding && (
           <div className="text-center py-8 text-zinc-500 dark:text-zinc-400">
             <p>No projects added yet.</p>
-            <p className="text-sm">Click "Add Project" to get started.</p>
+            <p className="text-sm">Click &quot;Add Project&quot; to get started.</p>
           </div>
         )}
       </div>
