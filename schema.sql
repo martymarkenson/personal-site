@@ -1,14 +1,11 @@
--- Enable Row Level Security on auth.users
-ALTER TABLE auth.users ENABLE ROW LEVEL SECURITY;
-
 -- Create user_profiles table
 CREATE TABLE user_profiles (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE UNIQUE NOT NULL,
   username VARCHAR(50) UNIQUE NOT NULL,
   name VARCHAR(100) NOT NULL,
-  title VARCHAR(200),
-  bio TEXT,
+  custom_title VARCHAR(200),
+  custom_subtext TEXT,
   avatar_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -119,15 +116,10 @@ CREATE TRIGGER update_work_experiences_updated_at BEFORE UPDATE ON work_experien
 CREATE TRIGGER update_projects_updated_at BEFORE UPDATE ON projects FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Create Storage buckets (run these in the Supabase Storage section)
--- INSERT INTO storage.buckets (id, name, public) VALUES ('avatars', 'avatars', true);
--- INSERT INTO storage.buckets (id, name, public) VALUES ('project-logos', 'project-logos', true);
--- INSERT INTO storage.buckets (id, name, public) VALUES ('work-logos', 'work-logos', true);
--- INSERT INTO storage.buckets (id, name, public) VALUES ('gallery-images', 'gallery-images', true);
+INSERT INTO storage.buckets (id, name, public) VALUES ('user-images', 'user-images', true);
 
--- Storage policies (uncomment after creating buckets)
--- CREATE POLICY "Avatar images are publicly accessible" ON storage.objects FOR SELECT USING (bucket_id = 'avatars');
--- CREATE POLICY "Users can upload their own avatars" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
--- CREATE POLICY "Users can update their own avatars" ON storage.objects FOR UPDATE USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
--- CREATE POLICY "Users can delete their own avatars" ON storage.objects FOR DELETE USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
-
--- Similar policies for other buckets...
+-- Storage policies for user-images bucket
+CREATE POLICY "User images are publicly accessible" ON storage.objects FOR SELECT USING (bucket_id = 'user-images');
+CREATE POLICY "Users can upload their own images" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'user-images' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Users can update their own images" ON storage.objects FOR UPDATE USING (bucket_id = 'user-images' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Users can delete their own images" ON storage.objects FOR DELETE USING (bucket_id = 'user-images' AND auth.uid()::text = (storage.foldername(name))[1]);

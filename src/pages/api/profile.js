@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     case 'POST':
     case 'PUT':
       try {
-        const { username, name, title, bio, avatar_url } = req.body
+        const { username, name, custom_title, custom_subtext, avatar_url } = req.body
 
         // Check if username is already taken (if it's being changed)
         if (username) {
@@ -57,8 +57,8 @@ export default async function handler(req, res) {
           user_id: user.id,
           username,
           name,
-          title,
-          bio,
+          custom_title,
+          custom_subtext,
           avatar_url,
         }
 

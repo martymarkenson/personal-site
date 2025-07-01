@@ -16,7 +16,14 @@ function WorkExperienceForm({ experience, onSave, onCancel, isLoading }) {
   })
 
   const onSubmit = (data) => {
-    onSave({ ...data, id: experience?.id })
+    // Handle empty date strings by converting them to null
+    const processedData = {
+      ...data,
+      id: experience?.id,
+      start_date: data.start_date || null,
+      end_date: data.end_date || null,
+    }
+    onSave(processedData)
   }
 
   return (

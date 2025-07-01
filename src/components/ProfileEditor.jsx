@@ -7,8 +7,8 @@ export function ProfileEditor({ profile, onSave, isLoading }) {
     defaultValues: {
       name: profile?.name || '',
       username: profile?.username || '',
-      title: profile?.title || '',
-      bio: profile?.bio || '',
+      custom_title: profile?.custom_title || '',
+      custom_subtext: profile?.custom_subtext || '',
     }
   })
 
@@ -17,8 +17,8 @@ export function ProfileEditor({ profile, onSave, isLoading }) {
       reset({
         name: profile.name || '',
         username: profile.username || '',
-        title: profile.title || '',
-        bio: profile.bio || '',
+        custom_title: profile.custom_title || '',
+        custom_subtext: profile.custom_subtext || '',
       })
     }
   }, [profile, reset])
@@ -76,30 +76,37 @@ export function ProfileEditor({ profile, onSave, isLoading }) {
         </div>
 
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-            Professional Title
+          <label htmlFor="custom_title" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+            Custom Page Title
           </label>
           <input
-            id="title"
+            id="custom_title"
             type="text"
-            {...register('title')}
+            {...register('custom_title')}
             className="w-full appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-2 shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
-            placeholder="e.g. Product Manager who writes code"
+            placeholder="Your team said 6 months. I'll ship it in 6 weeks."
           />
+          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+            This will replace the default headline on your profile page. Leave blank to use the default.
+          </p>
         </div>
 
         <div>
-          <label htmlFor="bio" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-            Bio
+          <label htmlFor="custom_subtext" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+            Custom Subtext
           </label>
           <textarea
-            id="bio"
-            rows={4}
-            {...register('bio')}
+            id="custom_subtext"
+            rows={3}
+            {...register('custom_subtext')}
             className="w-full appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-2 shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm resize-none"
-            placeholder="Tell us about yourself..."
+            placeholder="I'm a product manager who writes code. I'll figure out what your users actually need and build software that fits into your roadmap."
           />
+          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+            This will replace the default subtext on your profile page. Leave blank to use the default format.
+          </p>
         </div>
+
 
         <div className="flex justify-end">
           <Button

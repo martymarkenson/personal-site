@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/future/image'
 import Link from 'next/link'
+import clsx from 'clsx'
 import { Container } from '@/components/Container'
 import { Button } from '@/components/Button'
 import { 
@@ -11,6 +12,56 @@ import {
   GitHubIcon,
   LinkedInIcon,
 } from '@/components/SocialIcons'
+import image1 from '@/images/photos/image-1.jpg'
+import image2 from '@/images/photos/image-2.jpg'
+import image3 from '@/images/photos/image-3.jpg'
+import image4 from '@/images/photos/image-4.jpg'
+import image5 from '@/images/photos/image-5.jpg'
+import logoCS from '@/images/logos/codingscape_logo.jpeg'
+import underline from '@/images/underline.svg'
+import cross from '@/images/cross-2.svg'
+
+function SendIcon(props) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M5 12h14M12 5l7 7-7 7"
+        className="stroke-current"
+      />
+    </svg>
+  )
+}
+
+function MailIcon(props) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
+        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+      />
+      <path
+        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
+        className="stroke-zinc-400 dark:stroke-zinc-500"
+      />
+    </svg>
+  )
+}
 
 function BriefcaseIcon(props) {
   return (
@@ -48,7 +99,7 @@ function CodeIcon(props) {
     >
       <path
         d="M16 18l6-6-6-6M8 6l-6 6 6 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
+        className="stroke-current"
       />
     </svg>
   )
@@ -60,7 +111,7 @@ function Resume({ workExperiences }) {
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
+        <BriefcaseIcon className="h-6 w-6 flex-none text-red-500" />
         <span className="ml-3">Work Experience</span>
       </h2>
       <ol className="mt-6 space-y-4">
@@ -121,7 +172,7 @@ function Projects({ projects }) {
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <CodeIcon className="h-6 w-6 flex-none" />
+        <CodeIcon className="h-6 w-6 flex-none text-red-500" />
         <span className="ml-3">Projects</span>
       </h2>
       <ol className="mt-6 space-y-4">
@@ -145,7 +196,7 @@ function Projects({ projects }) {
               <dt className="sr-only">Project</dt>
               <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
                 {project.url ? (
-                  <Link href={project.url} className="hover:text-teal-500 transition-colors">
+                  <Link href={project.url} className="hover:text-red-500 transition-colors">
                     {project.name}
                   </Link>
                 ) : (
@@ -168,19 +219,287 @@ function Projects({ projects }) {
   )
 }
 
-export default function UserProfile({ profileData, notFound }) {
-  const router = useRouter()
+function Hero({ profile }) {
 
-  if (router.isFallback) {
-    return (
-      <Container className="mt-16 sm:mt-32">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
-          <p className="mt-2 text-zinc-600 dark:text-zinc-400">Loading profile...</p>
+  return (
+    <Container className="mt-9 w-full px-4">
+      <div className="max-w-2xl">
+        <div className="mb-8 flex items-center justify-between w-full">
+          <div className="flex items-center gap-3">
+            <Image
+              src={logoCS}
+              alt="Codingscape"
+              className="h-8 w-8 rounded-full"
+              width={32}
+              height={32}
+              unoptimized
+            />
+            <span className="text-zinc-800 dark:text-zinc-100 font-semibold text-base whitespace-nowrap">
+              {profile.name} <span className="text-red-500">×</span> Codingscape
+            </span>
+          </div>
+          <div className="hidden sm:flex gap-3 mt-2 sm:mt-0">
+            {/* Social links can be added here if stored in profile */}
+          </div>
         </div>
-      </Container>
+        
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+          {profile.custom_title ? (
+            profile.custom_title
+          ) : (
+            <>
+              <span className="whitespace-nowrap">
+                Your team said <span className="relative inline-block">
+                  <span className="relative z-0">6 months</span>
+                  <Image
+                    src={cross}
+                    className="pointer-events-none absolute left-1/4 sm:left-[18%] -bottom-6 sm:-bottom-9 w-[100px] sm:w-[160px] max-w-full h-auto z-50"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </span>.
+              </span><br/>I&apos;ll ship it in <span className="relative inline-block">
+              <span className="relative z-10">6 weeks</span>
+            </span>.
+            </>
+          )}
+        </h1>
+        {profile.custom_subtext ? (
+          <div className="mt-6 space-y-4 text-base text-zinc-600 dark:text-zinc-400">
+            {profile.custom_subtext.split('\n').map((paragraph, index) => (
+              paragraph.trim() && (
+                <p key={index}>
+                  {paragraph}
+                </p>
+              )
+            ))}
+          </div>
+        ) : (
+          <>
+            <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+              I&apos;m {profile.name.split(' ')[0]}, a product manager who writes code. I&apos;ll figure out what your users actually need and build software that fits into your roadmap.
+            </p>
+            <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+              Every week you&apos;ll see working software, not presentations.
+            </p>
+          </>
+        )}
+        
+        <div className="mt-8">
+          <Button
+            href="#contact-form"
+            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-500 ease-out hover:!bg-white hover:text-black hover:!border-red-500 active:text-black group"
+            style={{ letterSpacing: '0.15em' }}
+            onClick={(e) => {
+              e.preventDefault();
+              const contactSection = document.getElementById('contact-form');
+              if (contactSection) {
+                contactSection.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }
+            }}
+          >
+            let&apos;s talk specifics
+            <SendIcon className="arrow-icon h-5 w-5 ml-2 transition-all duration-500 ease-out group-hover:text-black text-white" />
+          </Button>
+        </div>
+      </div>
+    </Container>
+  )
+}
+
+function Photos({ images }) {
+  // Use user's images if available, otherwise use default photos
+  const displayImages = images && images.length > 0 
+    ? images.slice(0, 5).map(img => ({ src: img.url, alt: img.alt_text || '' }))
+    : [image1, image2, image3, image4, image5].map(img => ({ src: img.src || img, alt: '' }))
+
+  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+
+  return (
+    <div className="mt-16 sm:mt-20">
+      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+        {displayImages.map((image, imageIndex) => (
+          <div
+            key={imageIndex}
+            className={clsx(
+              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
+              rotations[imageIndex % rotations.length]
+            )}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt || ''}
+              sizes="(min-width: 640px) 18rem, 11rem"
+              className="absolute inset-0 h-full w-full object-cover"
+              width={288}
+              height={320}
+              unoptimized
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function ContactForm({ profile }) {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError('')
+
+    const formData = new FormData(e.target)
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+      profileOwner: profile.name,
+      profileUrl: window.location.href,
+    }
+
+    try {
+      // You can replace this with your own form handler
+      const response = await fetch('https://submit-form.com/Yl4JDoOAD', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (response.ok) {
+        setIsSubmitted(true)
+        e.target.reset()
+      } else {
+        throw new Error('Failed to submit form')
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (isSubmitted) {
+    return (
+      <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+          <MailIcon className="h-6 w-6 flex-none" />
+          <span className="ml-3">Message sent!</span>
+        </h2>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+          Thank you for reaching out to {profile.name}. They&apos;ll get back to you soon!
+        </p>
+        <Button 
+          onClick={() => setIsSubmitted(false)}
+          className="mt-4 !bg-red-500 !hover:bg-red-600 !text-white !border-2 !border-black px-6 py-3"
+        >
+          Send another message
+        </Button>
+      </div>
     )
   }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+    >
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <MailIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Get in touch with {profile.name.split(' ')[0]}</span>
+      </h2>
+      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        Have a project in mind? Let&apos;s discuss how {profile.name.split(' ')[0]} can help bring your ideas to life.
+      </p>
+      {error && (
+        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800">
+          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        </div>
+      )}
+      <div className="mt-6 space-y-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            aria-label="Name"
+            required
+            disabled={isSubmitting}
+            className="min-w-0 appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-red-400 dark:focus:ring-red-400/10 sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email address"
+            aria-label="Email address"
+            required
+            disabled={isSubmitting}
+            className="min-w-0 appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-red-400 dark:focus:ring-red-400/10 sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          />
+        </div>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Tell me about your project..."
+          aria-label="Message"
+          required
+          rows={4}
+          disabled={isSubmitting}
+          className="w-full appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-red-400 dark:focus:ring-red-400/10 sm:text-sm resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+        />
+        <div className="flex justify-start">
+          <Button
+            type="submit"
+            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-300 hover:!bg-white hover:text-black hover:!border-red-500 active:text-black flex-none"
+            style={{ letterSpacing: '0.15em' }}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Sending...
+              </>
+            ) : (
+              <>
+                Send message
+                <SendIcon className="h-4 w-4 ml-1" />
+              </>
+            )}
+          </Button>
+        </div>
+      </div>
+    </form>
+  )
+}
+
+export default function UserProfile({ profileData, notFound }) {
+  useEffect(() => {
+    // Force dark mode immediately to prevent flash
+    document.documentElement.classList.add('dark');
+    // Set custom background color
+    document.documentElement.style.backgroundColor = '#00020E';
+    document.body.style.backgroundColor = '#00020E';
+    
+    return () => {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.style.backgroundColor = '';
+      document.body.style.backgroundColor = '';
+    };
+  }, []);
 
   if (notFound) {
     return (
@@ -188,19 +507,21 @@ export default function UserProfile({ profileData, notFound }) {
         <Head>
           <title>User Not Found</title>
         </Head>
-        <Container className="mt-16 sm:mt-32">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-              Profile not found
-            </h1>
-            <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-              The profile you're looking for doesn't exist.
-            </p>
-            <Button href="/" className="mt-8">
-              Go home
-            </Button>
-          </div>
-        </Container>
+        <div className="overflow-x-hidden" style={{ backgroundColor: '#00020E' }}>
+          <Container className="mt-16 sm:mt-32">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+                Profile not found
+              </h1>
+              <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+                The profile you're looking for doesn't exist.
+              </p>
+              <Button href="/" className="mt-8">
+                Go home
+              </Button>
+            </div>
+          </Container>
+        </div>
       </>
     )
   }
@@ -215,103 +536,108 @@ export default function UserProfile({ profileData, notFound }) {
           name="description"
           content={profile.bio || `${profile.name}'s professional profile`}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.backgroundColor = '#00020E';
+                document.body.style.backgroundColor = '#00020E';
+              })();
+            `,
+          }}
+        />
+        <link rel="icon" href="/codinscape.ico" type="image/x-icon" />
       </Head>
-      
-      <Container className="mt-9">
-        <div className="max-w-2xl">
-          <div className="mb-8 flex items-center justify-between w-full">
-            <div className="text-zinc-800 dark:text-zinc-100 font-semibold text-base">
-              {profile.name}
-            </div>
-            <div className="flex gap-3">
-              {/* Add social links here if they're in the profile */}
+      <div className="overflow-x-hidden" style={{ backgroundColor: '#00020E' }}>
+        <Hero profile={profile} />
+        <Photos images={images} />
+        <Container className="mt-24 md:mt-28">
+          <div className="mx-auto max-w-xl space-y-10">
+            <Projects projects={projects} />
+            <Resume workExperiences={workExperiences} />
+            <div id="contact-form">
+              <ContactForm profile={profile} />
             </div>
           </div>
-          
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            {profile.title || profile.name}
-          </h1>
-          
-          {profile.bio && (
-            <div className="mt-6 text-base text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap">
-              {profile.bio}
-            </div>
-          )}
-        </div>
-      </Container>
-
-      {/* Display gallery images if available */}
-      {images && images.length > 0 && (
-        <div className="mt-16 sm:mt-20">
-          <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-            {images.slice(0, 5).map((image, imageIndex) => (
-              <div
-                key={image.id}
-                className="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl"
-              >
-                <Image
-                  src={image.url}
-                  alt={image.alt_text || ''}
-                  sizes="(min-width: 640px) 18rem, 11rem"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  width={288}
-                  height={320}
-                  unoptimized
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto max-w-xl space-y-10">
-          <Projects projects={projects} />
-          <Resume workExperiences={workExperiences} />
-        </div>
-      </Container>
+        </Container>
+      </div>
     </>
   )
 }
 
-export async function getStaticPaths() {
-  // Return empty paths for now - profiles will be generated on-demand
-  return {
-    paths: [],
-    fallback: true
-  }
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const { username } = params
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/public/${username}`)
-    
-    if (!response.ok) {
-      return {
-        props: {
-          notFound: true
-        },
-        revalidate: 60 // Try again in 60 seconds
+    // Import supabase here for server-side use
+    const { createClient } = require('@supabase/supabase-js')
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    )
+
+    // Get user profile
+    const { data: profile, error: profileError } = await supabase
+      .from('user_profiles')
+      .select('*')
+      .eq('username', username)
+      .single()
+
+    if (profileError) {
+      if (profileError.code === 'PGRST116') {
+        return {
+          props: {
+            notFound: true
+          }
+        }
       }
+      throw profileError
     }
 
-    const profileData = await response.json()
+    // Get work experiences
+    const { data: workExperiences, error: workError } = await supabase
+      .from('work_experiences')
+      .select('*')
+      .eq('user_id', profile.user_id)
+      .order('order_index', { ascending: true })
+
+    if (workError) throw workError
+
+    // Get projects
+    const { data: projects, error: projectsError } = await supabase
+      .from('projects')
+      .select('*')
+      .eq('user_id', profile.user_id)
+      .order('order_index', { ascending: true })
+
+    if (projectsError) throw projectsError
+
+    // Get images
+    const { data: images, error: imagesError } = await supabase
+      .from('user_images')
+      .select('*')
+      .eq('user_id', profile.user_id)
+      .order('order_index', { ascending: true })
+
+    if (imagesError) throw imagesError
 
     return {
       props: {
-        profileData
-      },
-      revalidate: 300 // Revalidate every 5 minutes
+        profileData: {
+          profile,
+          workExperiences: workExperiences || [],
+          projects: projects || [],
+          images: images || [],
+        }
+      }
     }
   } catch (error) {
     console.error('Error fetching profile:', error)
     return {
       props: {
         notFound: true
-      },
-      revalidate: 60
+      }
     }
   }
 }

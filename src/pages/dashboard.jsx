@@ -8,12 +8,14 @@ import { Button } from '@/components/Button'
 import { ProfileEditor } from '@/components/ProfileEditor'
 import { WorkExperienceEditor } from '@/components/WorkExperienceEditor'
 import { ProjectEditor } from '@/components/ProjectEditor'
+import { ImageEditor } from '@/components/ImageEditor'
 
 export default function Dashboard() {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
   const [workExperiences, setWorkExperiences] = useState([])
   const [projects, setProjects] = useState([])
+  const [images, setImages] = useState([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -71,6 +73,15 @@ export default function Dashboard() {
         .order('order_index', { ascending: true })
       
       setProjects(projectData || [])
+
+      // Load images
+      const { data: imageData } = await supabase
+        .from('user_images')
+        .select('*')
+        .eq('user_id', userId)
+        .order('order_index', { ascending: true })
+      
+      setImages(imageData || [])
     } catch (error) {
       console.error('Error loading data:', error)
       setError('Failed to load profile data')
@@ -82,40 +93,39 @@ export default function Dashboard() {
     router.push('/')
   }
 
-  const makeAuthenticatedRequest = async (url, options = {}) => {
-    const { data: { session } } = await supabase.auth.getSession()
-    
-    if (!session) {
-      throw new Error('No active session')
-    }
-
-    return fetch(url, {
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${session.access_token}`,
-        ...options.headers,
-      },
-    })
-  }
-
   const handleProfileSave = async (profileData) => {
     setSaving(true)
     setError('')
 
     try {
-      const response = await makeAuthenticatedRequest('/api/profile', {
-        method: 'POST',
-        body: JSON.stringify(profileData),
-      })
+      // Check if username is already taken (if it's being changed)
+      if (profileData.username && profileData.username !== profile?.username) {
+        const { data: existingProfile } = await supabase
+          .from('user_profiles')
+          .select('user_id')
+          .eq('username', profileData.username)
+          .neq('user_id', user.id)
+          .single()
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to save profile')
+        if (existingProfile) {
+          throw new Error('Username is already taken')
+        }
       }
 
-      setProfile(data.profile)
+      const profileDataWithUserId = {
+        user_id: user.id,
+        ...profileData,
+      }
+
+      const { data: savedProfile, error } = await supabase
+        .from('user_profiles')
+        .upsert(profileDataWithUserId, { onConflict: 'user_id' })
+        .select()
+        .single()
+
+      if (error) throw error
+
+      setProfile(savedProfile)
     } catch (error) {
       setError(error.message)
     } finally {
@@ -128,18 +138,26 @@ export default function Dashboard() {
     setError('')
 
     try {
-      const response = await makeAuthenticatedRequest('/api/work-experiences', {
-        method: 'POST',
-        body: JSON.stringify({ ...workData, order_index: workExperiences.length }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to add work experience')
+      // Clean the data to handle empty strings
+      const cleanedData = {
+        ...workData,
+        start_date: workData.start_date || null,
+        end_date: workData.end_date || null,
       }
 
-      setWorkExperiences([...workExperiences, data.workExperience])
+      const { data: workExperience, error } = await supabase
+        .from('work_experiences')
+        .insert({
+          user_id: user.id,
+          ...cleanedData,
+          order_index: workExperiences.length,
+        })
+        .select()
+        .single()
+
+      if (error) throw error
+
+      setWorkExperiences([...workExperiences, workExperience])
     } catch (error) {
       setError(error.message)
     } finally {
@@ -152,19 +170,25 @@ export default function Dashboard() {
     setError('')
 
     try {
-      const response = await makeAuthenticatedRequest('/api/work-experiences', {
-        method: 'PUT',
-        body: JSON.stringify(workData),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to update work experience')
+      // Clean the data to handle empty strings
+      const cleanedData = {
+        ...workData,
+        start_date: workData.start_date || null,
+        end_date: workData.end_date || null,
       }
 
+      const { data: workExperience, error } = await supabase
+        .from('work_experiences')
+        .update(cleanedData)
+        .eq('id', workData.id)
+        .eq('user_id', user.id)
+        .select()
+        .single()
+
+      if (error) throw error
+
       setWorkExperiences(workExperiences.map(exp => 
-        exp.id === workData.id ? data.workExperience : exp
+        exp.id === workData.id ? workExperience : exp
       ))
     } catch (error) {
       setError(error.message)
@@ -178,15 +202,13 @@ export default function Dashboard() {
     setError('')
 
     try {
-      const response = await makeAuthenticatedRequest('/api/work-experiences', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
+      const { error } = await supabase
+        .from('work_experiences')
+        .delete()
+        .eq('id', id)
+        .eq('user_id', user.id)
 
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || 'Failed to delete work experience')
-      }
+      if (error) throw error
 
       setWorkExperiences(workExperiences.filter(exp => exp.id !== id))
     } catch (error) {
@@ -202,10 +224,11 @@ export default function Dashboard() {
     // Update order in database
     for (const item of reorderedItems) {
       try {
-        await makeAuthenticatedRequest('/api/work-experiences', {
-          method: 'PUT',
-          body: JSON.stringify({ id: item.id, order_index: item.order_index }),
-        })
+        await supabase
+          .from('work_experiences')
+          .update({ order_index: item.order_index })
+          .eq('id', item.id)
+          .eq('user_id', user.id)
       } catch (error) {
         console.error('Failed to update order:', error)
       }
@@ -217,18 +240,19 @@ export default function Dashboard() {
     setError('')
 
     try {
-      const response = await makeAuthenticatedRequest('/api/projects', {
-        method: 'POST',
-        body: JSON.stringify({ ...projectData, order_index: projects.length }),
-      })
+      const { data: project, error } = await supabase
+        .from('projects')
+        .insert({
+          user_id: user.id,
+          ...projectData,
+          order_index: projects.length,
+        })
+        .select()
+        .single()
 
-      const data = await response.json()
+      if (error) throw error
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to add project')
-      }
-
-      setProjects([...projects, data.project])
+      setProjects([...projects, project])
     } catch (error) {
       setError(error.message)
     } finally {
@@ -241,19 +265,18 @@ export default function Dashboard() {
     setError('')
 
     try {
-      const response = await makeAuthenticatedRequest('/api/projects', {
-        method: 'PUT',
-        body: JSON.stringify(projectData),
-      })
+      const { data: project, error } = await supabase
+        .from('projects')
+        .update(projectData)
+        .eq('id', projectData.id)
+        .eq('user_id', user.id)
+        .select()
+        .single()
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to update project')
-      }
+      if (error) throw error
 
       setProjects(projects.map(proj => 
-        proj.id === projectData.id ? data.project : proj
+        proj.id === projectData.id ? project : proj
       ))
     } catch (error) {
       setError(error.message)
@@ -267,15 +290,13 @@ export default function Dashboard() {
     setError('')
 
     try {
-      const response = await makeAuthenticatedRequest('/api/projects', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      })
+      const { error } = await supabase
+        .from('projects')
+        .delete()
+        .eq('id', id)
+        .eq('user_id', user.id)
 
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || 'Failed to delete project')
-      }
+      if (error) throw error
 
       setProjects(projects.filter(proj => proj.id !== id))
     } catch (error) {
@@ -291,10 +312,11 @@ export default function Dashboard() {
     // Update order in database
     for (const item of reorderedItems) {
       try {
-        await makeAuthenticatedRequest('/api/projects', {
-          method: 'PUT',
-          body: JSON.stringify({ id: item.id, order_index: item.order_index }),
-        })
+        await supabase
+          .from('projects')
+          .update({ order_index: item.order_index })
+          .eq('id', item.id)
+          .eq('user_id', user.id)
       } catch (error) {
         console.error('Failed to update order:', error)
       }
@@ -355,6 +377,7 @@ export default function Dashboard() {
               { id: 'profile', name: 'Profile' },
               { id: 'experience', name: 'Work Experience' },
               { id: 'projects', name: 'Projects' },
+              { id: 'images', name: 'Images' },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -399,6 +422,14 @@ export default function Dashboard() {
               onUpdate={handleProjectUpdate}
               onDelete={handleProjectDelete}
               onReorder={handleProjectReorder}
+              isLoading={saving}
+            />
+          )}
+
+          {activeTab === 'images' && (
+            <ImageEditor
+              images={images}
+              onImagesChange={setImages}
               isLoading={saving}
             />
           )}
