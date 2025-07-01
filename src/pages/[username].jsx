@@ -18,7 +18,6 @@ import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
 import logoCS from '@/images/logos/codingscape_logo.jpeg'
-import underline from '@/images/underline.svg'
 import cross from '@/images/cross-2.svg'
 
 function SendIcon(props) {
@@ -249,17 +248,11 @@ function Hero({ profile }) {
           ) : (
             <>
               <span className="whitespace-nowrap">
-                Your team said <span className="relative inline-block">
-                  <span className="relative z-0">6 months</span>
-                  <Image
-                    src={cross}
-                    className="pointer-events-none absolute left-1/4 sm:left-[18%] -bottom-6 sm:-bottom-9 w-[100px] sm:w-[160px] max-w-full h-auto z-50"
-                    alt=""
-                    aria-hidden="true"
-                  />
+                Your team said <span className="relative inline-block no-underline strikethrough-text">
+                  <span className="relative z-0 no-underline strikethrough-text">6 months</span>
                 </span>.
-              </span><br/>I&apos;ll ship it in <span className="relative inline-block">
-              <span className="relative z-10">6 weeks</span>
+              </span><br/>I&apos;ll ship it in <span className="relative inline-block no-underline">
+              <span className="relative z-10 no-underline">6 weeks</span>
             </span>.
             </>
           )}
@@ -291,7 +284,7 @@ function Hero({ profile }) {
         <div className="mt-8">
           <Button
             href="#contact-form"
-            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-500 ease-out hover:!bg-white hover:text-black hover:!border-red-500 active:text-black group"
+            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-500 ease-out hover:!bg-white hover:!text-black hover:!border-red-500 active:!text-black group"
             style={{ letterSpacing: '0.15em' }}
             onClick={(e) => {
               e.preventDefault();
@@ -305,7 +298,7 @@ function Hero({ profile }) {
             }}
           >
 TALK WITH {profile.name.split(' ')[0].toUpperCase()}
-            <SendIcon className="arrow-icon h-5 w-5 ml-2 transition-all duration-500 ease-out group-hover:text-black text-white" />
+            <SendIcon className="arrow-icon h-5 w-5 ml-2 transition-all duration-500 ease-out group-hover:!text-black text-white" />
           </Button>
         </div>
       </div>
@@ -464,7 +457,7 @@ function ContactForm({ profile }) {
         <div className="flex justify-start">
           <Button
             type="submit"
-            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-300 hover:!bg-white hover:text-black hover:!border-red-500 active:text-black flex-none"
+            className="!bg-red-500 !border-2 !border-red-500 text-white font-mono font-bold text-base px-6 py-3 rounded-none tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-300 hover:!bg-white hover:!text-black hover:!border-red-500 active:!text-black flex-none"
             style={{ letterSpacing: '0.15em' }}
             disabled={isSubmitting}
           >
@@ -623,6 +616,36 @@ export default function UserProfile({ profileData, notFound }) {
               .dark a:not(.text-white) {
                 color: #f4f4f5;
               }
+              /* Remove any text decorations from title spans */
+              .dark h1 span,
+              .dark h1 span *,
+              .dark span.relative,
+              .dark span.inline-block,
+              .dark h1,
+              .dark h1 *,
+              h1 span,
+              h1 span *,
+              span.relative,
+              span.inline-block,
+              .relative.inline-block,
+              .relative.z-0,
+              .relative.z-10 {
+                text-decoration: none !important;
+                text-decoration-line: none !important;
+                text-underline-offset: 0 !important;
+                border-bottom: none !important;
+              }
+              /* Specific targeting for strikethrough text */
+              .strikethrough-text,
+              .strikethrough-text *,
+              span.strikethrough-text,
+              span.strikethrough-text * {
+                text-decoration: none !important;
+                text-decoration-line: none !important;
+                text-underline-offset: 0 !important;
+                border-bottom: none !important;
+                box-shadow: none !important;
+              }
             `,
           }}
         />
@@ -642,7 +665,7 @@ export default function UserProfile({ profileData, notFound }) {
       <div className="overflow-x-hidden min-h-screen" style={{ backgroundColor: '#00020E' }}>
         <Hero profile={profile} />
         <Photos images={images} />
-        <Container className="mt-24 md:mt-28 pb-16">
+        <Container className="mt-24 md:mt-28 pb-16" style={{ backgroundColor: '#00020E' }}>
           <div className="mx-auto max-w-xl space-y-10">
             <Projects projects={projects} />
             <Resume workExperiences={workExperiences} />

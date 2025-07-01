@@ -17,14 +17,14 @@ function NavLink({ href, children }) {
 
 export function Footer() {
   return (
-    <footer className="mt-32">
+    <footer className="mt-32" style={{ backgroundColor: '#00020E' }}>
       <Container.Outer>
         <div className="pt-10 pb-16">
           <Container.Inner>
             <div className="flex justify-center">
               <div className="flex items-center gap-2">
                 <Image src={logoCS} alt="Codingscape" className="h-6 w-6 rounded-full" unoptimized />
-                <p className="text-sm text-zinc-400 dark:text-zinc-500">
+                <p className="text-sm text-zinc-400">
                   &copy; {new Date().getFullYear()} Marty Markenson. All rights
                   reserved.
                 </p>
