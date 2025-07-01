@@ -2,18 +2,40 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/Button'
 
-export function ProfileEditor({ profile, onSave, isLoading }) {
-  const { register, handleSubmit, formState: { errors, isDirty }, reset } = useForm({
+export function ProfileEditor({ 
+  profile, 
+  profileDraft, 
+  onSave, 
+  onDraftChange, 
+  hasUnsavedChanges, 
+  lastSaved, 
+  isLoading 
+}) {
+  const { register, handleSubmit, formState: { errors, isDirty }, reset, watch, setValue } = useForm({
     defaultValues: {
-      name: profile?.name || '',
-      username: profile?.username || '',
-      custom_title: profile?.custom_title || '',
-      custom_subtext: profile?.custom_subtext || '',
+      name: profileDraft?.name || profile?.name || '',
+      username: profileDraft?.username || profile?.username || '',
+      custom_title: profileDraft?.custom_title || profile?.custom_title || '',
+      custom_subtext: profileDraft?.custom_subtext || profile?.custom_subtext || '',
     }
   })
 
+  // Watch all form values for auto-save
+  const watchedValues = watch()
+
+  // Load draft data when component mounts or when profileDraft changes
   useEffect(() => {
-    if (profile) {
+    if (profileDraft) {
+      setValue('name', profileDraft.name || '')
+      setValue('username', profileDraft.username || '')
+      setValue('custom_title', profileDraft.custom_title || '')
+      setValue('custom_subtext', profileDraft.custom_subtext || '')
+    }
+  }, [profileDraft, setValue])
+
+  // Reset form when profile changes (from server)
+  useEffect(() => {
+    if (profile && !profileDraft) {
       reset({
         name: profile.name || '',
         username: profile.username || '',
@@ -21,7 +43,19 @@ export function ProfileEditor({ profile, onSave, isLoading }) {
         custom_subtext: profile.custom_subtext || '',
       })
     }
-  }, [profile, reset])
+  }, [profile, profileDraft, reset])
+
+  // Auto-save to Dashboard when form values change
+  useEffect(() => {
+    if (onDraftChange && profile?.user_id) {
+      // Debounce the save operation
+      const timeoutId = setTimeout(() => {
+        onDraftChange(watchedValues)
+      }, 500) // Save 500ms after user stops typing
+
+      return () => clearTimeout(timeoutId)
+    }
+  }, [watchedValues, onDraftChange, profile])
 
   const onSubmit = (data) => {
     onSave(data)
@@ -29,9 +63,19 @@ export function ProfileEditor({ profile, onSave, isLoading }) {
 
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-6">
-        Profile Information
-      </h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+          Profile Information
+        </h2>
+        <div className="flex items-center gap-3">
+          {hasUnsavedChanges && (
+            <div className="flex items-center gap-2 text-sm text-amber-600 dark:text-amber-400">
+              <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+              Unsaved changes
+            </div>
+          )}
+        </div>
+      </div>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
@@ -112,9 +156,9 @@ export function ProfileEditor({ profile, onSave, isLoading }) {
           <Button
             type="submit"
             disabled={!isDirty || isLoading}
-            className="px-6"
+            className={`px-6 ${hasUnsavedChanges ? '!bg-amber-600 hover:!bg-amber-700 dark:!bg-amber-500 dark:hover:!bg-amber-600' : ''}`}
           >
-            {isLoading ? 'Saving...' : 'Save Profile'}
+            {isLoading ? 'Saving...' : hasUnsavedChanges ? 'Save Changes' : 'Save Profile'}
           </Button>
         </div>
       </form>

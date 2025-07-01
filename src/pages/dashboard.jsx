@@ -20,11 +20,74 @@ export default function Dashboard() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [activeTab, setActiveTab] = useState('profile')
+  const [profileDraft, setProfileDraft] = useState(null)
+  const [hasUnsavedProfile, setHasUnsavedProfile] = useState(false)
+  const [lastSaved, setLastSaved] = useState(null)
   const router = useRouter()
 
   useEffect(() => {
     checkUser()
   }, [])
+
+  // Auto-save profile draft functions
+  const getStorageKey = () => user?.id ? `profile_draft_${user.id}` : 'profile_draft_temp'
+
+  const saveProfileDraft = (draftData) => {
+    if (typeof window !== 'undefined' && user?.id) {
+      const draftWithTimestamp = {
+        ...draftData,
+        timestamp: new Date().toISOString()
+      }
+      localStorage.setItem(getStorageKey(), JSON.stringify(draftWithTimestamp))
+      setProfileDraft(draftWithTimestamp)
+      setLastSaved(new Date())
+      
+      // Check if current values differ from saved profile
+      const hasChanges = 
+        draftData.name !== (profile?.name || '') ||
+        draftData.username !== (profile?.username || '') ||
+        draftData.custom_title !== (profile?.custom_title || '') ||
+        draftData.custom_subtext !== (profile?.custom_subtext || '')
+      
+      setHasUnsavedProfile(hasChanges)
+    }
+  }
+
+  const loadProfileDraft = () => {
+    if (typeof window !== 'undefined' && user?.id) {
+      const saved = localStorage.getItem(getStorageKey())
+      if (saved) {
+        try {
+          const parsedData = JSON.parse(saved)
+          // Only load if we don't have a server profile or if draft is newer
+          if (!profile || new Date(parsedData.timestamp) > new Date(profile.updated_at || 0)) {
+            setProfileDraft(parsedData)
+            setHasUnsavedProfile(true)
+            setLastSaved(new Date(parsedData.timestamp))
+            return parsedData
+          }
+        } catch (error) {
+          console.warn('Failed to load draft:', error)
+        }
+      }
+    }
+    return null
+  }
+
+  const clearProfileDraft = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(getStorageKey())
+    }
+    setProfileDraft(null)
+    setHasUnsavedProfile(false)
+  }
+
+  // Load draft when user is available
+  useEffect(() => {
+    if (user?.id) {
+      loadProfileDraft()
+    }
+  }, [user, profile])
 
   const checkUser = async () => {
     try {
@@ -126,6 +189,7 @@ export default function Dashboard() {
       if (error) throw error
 
       setProfile(savedProfile)
+      clearProfileDraft() // Clear draft after successful save
     } catch (error) {
       setError(error.message)
     } finally {
@@ -343,9 +407,17 @@ export default function Dashboard() {
       <Container className="mt-16 sm:mt-32">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
-              Dashboard
-            </h1>
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl font-bold text-zinc-800 dark:text-zinc-100">
+                Dashboard
+              </h1>
+              {hasUnsavedProfile && (
+                <div className="flex items-center gap-2 text-sm text-amber-600 dark:text-amber-400">
+                  <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                  Unsaved profile changes
+                </div>
+              )}
+            </div>
             <p className="mt-2 text-zinc-600 dark:text-zinc-400">
               Welcome back, {user?.email}
             </p>
@@ -399,7 +471,11 @@ export default function Dashboard() {
           {activeTab === 'profile' && (
             <ProfileEditor
               profile={profile}
+              profileDraft={profileDraft}
               onSave={handleProfileSave}
+              onDraftChange={saveProfileDraft}
+              hasUnsavedChanges={hasUnsavedProfile}
+              lastSaved={lastSaved}
               isLoading={saving}
             />
           )}
