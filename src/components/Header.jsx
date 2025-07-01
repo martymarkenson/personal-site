@@ -5,8 +5,10 @@ import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { Button } from '@/components/Button'
 import avatarImage from '@/images/avatar.jpg'
-import { Fragment, useEffect, useRef } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { supabase } from '@/lib/supabase'
 
 function CloseIcon(props) {
   return (
@@ -169,6 +171,44 @@ function DesktopNavigation(props) {
         {/* <NavItem href="/uses">Uses</NavItem> */}
       </ul>
     </nav>
+  )
+}
+
+function AuthButton() {
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null)
+      setLoading(false)
+    })
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
+  if (loading) {
+    return null
+  }
+
+  if (user) {
+    return (
+      <Button href="/dashboard" className="text-sm">
+        Dashboard
+      </Button>
+    )
+  }
+
+  return (
+    <Button href="/login" className="text-sm">
+      Login
+    </Button>
   )
 }
 
@@ -413,7 +453,8 @@ export function Header() {
                 <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
               <div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto">
+                <div className="pointer-events-auto flex items-center space-x-4">
+                  <AuthButton />
                   <ModeToggle />
                 </div>
               </div>
