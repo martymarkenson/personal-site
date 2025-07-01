@@ -110,7 +110,7 @@ function Resume({ workExperiences }) {
 
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      <h2 className="flex text-sm font-semibold text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none text-red-500" />
         <span className="ml-3">Work Experience</span>
       </h2>
@@ -133,15 +133,15 @@ function Resume({ workExperiences }) {
             </div>
             <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Company</dt>
-              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              <dd className="w-full flex-none text-sm font-medium text-zinc-100">
                 {role.company}
               </dd>
               <dt className="sr-only">Role</dt>
-              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
+              <dd className="text-xs text-zinc-400">
                 {role.title}
               </dd>
               <dt className="sr-only">Date</dt>
-              <dd className="ml-auto text-xs text-zinc-400 dark:text-zinc-500">
+              <dd className="ml-auto text-xs text-zinc-400">
                 <time dateTime={role.start_date}>
                   {new Date(role.start_date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                 </time>{' '}
@@ -154,7 +154,7 @@ function Resume({ workExperiences }) {
                 </time>
               </dd>
               {role.description && (
-                <dd className="w-full text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                <dd className="w-full text-xs text-zinc-400 mt-2">
                   {role.description}
                 </dd>
               )}
@@ -171,7 +171,7 @@ function Projects({ projects }) {
 
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      <h2 className="flex text-sm font-semibold text-zinc-100">
         <CodeIcon className="h-6 w-6 flex-none text-red-500" />
         <span className="ml-3">Projects</span>
       </h2>
@@ -194,7 +194,7 @@ function Projects({ projects }) {
             </div>
             <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Project</dt>
-              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              <dd className="w-full flex-none text-sm font-medium text-zinc-100">
                 {project.url ? (
                   <Link href={project.url} className="hover:text-red-500 transition-colors">
                     {project.name}
@@ -204,11 +204,11 @@ function Projects({ projects }) {
                 )}
               </dd>
               <dt className="sr-only">Description</dt>
-              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
+              <dd className="text-xs text-zinc-400">
                 {project.description}
               </dd>
               <dt className="sr-only">Year</dt>
-              <dd className="ml-auto text-xs text-zinc-400 dark:text-zinc-500">
+              <dd className="ml-auto text-xs text-zinc-400">
                 {project.year}
               </dd>
             </dl>
@@ -234,7 +234,7 @@ function Hero({ profile }) {
               height={32}
               unoptimized
             />
-            <span className="text-zinc-800 dark:text-zinc-100 font-semibold text-base whitespace-nowrap">
+            <span className="text-zinc-100 font-semibold text-base whitespace-nowrap">
               {profile.name} <span className="text-red-500">×</span> Codingscape
             </span>
           </div>
@@ -243,7 +243,7 @@ function Hero({ profile }) {
           </div>
         </div>
         
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
           {profile.custom_title ? (
             profile.custom_title
           ) : (
@@ -265,7 +265,7 @@ function Hero({ profile }) {
           )}
         </h1>
         {profile.custom_subtext ? (
-          <div className="mt-6 space-y-4 text-base text-zinc-600 dark:text-zinc-400">
+          <div className="mt-6 space-y-4 text-base text-zinc-400">
             {profile.custom_subtext.split('\n').map((paragraph, index) => (
               paragraph.trim() && (
                 <p key={index}>
@@ -276,11 +276,14 @@ function Hero({ profile }) {
           </div>
         ) : (
           <>
-            <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+            <p className="mt-6 text-base text-zinc-400">
               I&apos;m {profile.name.split(' ')[0]}, a product manager who writes code. I&apos;ll figure out what your users actually need and build software that fits into your roadmap.
             </p>
-            <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+            <p className="mt-4 text-base text-zinc-400">
               Every week you&apos;ll see working software, not presentations.
+            </p>
+            <p className="mt-4 text-base text-zinc-400">
+              With 10 years of experience building for billion dollar companies and startups, you&apos;ll get production ready software (NextJS and Vercel) so your team can maintain it.
             </p>
           </>
         )}
@@ -301,7 +304,7 @@ function Hero({ profile }) {
               }
             }}
           >
-            let&apos;s talk specifics
+TALK WITH {profile.name.split(' ')[0].toUpperCase()}
             <SendIcon className="arrow-icon h-5 w-5 ml-2 transition-all duration-500 ease-out group-hover:text-black text-white" />
           </Button>
         </div>
@@ -391,11 +394,11 @@ function ContactForm({ profile }) {
   if (isSubmitted) {
     return (
       <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <h2 className="flex text-sm font-semibold text-zinc-100">
           <MailIcon className="h-6 w-6 flex-none" />
           <span className="ml-3">Message sent!</span>
         </h2>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-zinc-400">
           Thank you for reaching out to {profile.name}. They&apos;ll get back to you soon!
         </p>
         <Button 
@@ -413,11 +416,11 @@ function ContactForm({ profile }) {
       onSubmit={handleSubmit}
       className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
     >
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      <h2 className="flex text-sm font-semibold text-zinc-100">
         <MailIcon className="h-6 w-6 flex-none" />
         <span className="ml-3">Get in touch with {profile.name.split(' ')[0]}</span>
       </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="mt-2 text-sm text-zinc-400">
         Have a project in mind? Let&apos;s discuss how {profile.name.split(' ')[0]} can help bring your ideas to life.
       </p>
       {error && (
@@ -507,13 +510,13 @@ export default function UserProfile({ profileData, notFound }) {
         <Head>
           <title>User Not Found</title>
         </Head>
-        <div className="overflow-x-hidden" style={{ backgroundColor: '#00020E' }}>
+        <div className="overflow-x-hidden min-h-screen" style={{ backgroundColor: '#00020E' }}>
           <Container className="mt-16 sm:mt-32">
             <div className="text-center">
-              <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+              <h1 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
                 Profile not found
               </h1>
-              <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+              <p className="mt-6 text-base text-zinc-400">
                 The profile you're looking for doesn't exist.
               </p>
               <Button href="/" className="mt-8">
@@ -536,6 +539,93 @@ export default function UserProfile({ profileData, notFound }) {
           name="description"
           content={profile.bio || `${profile.name}'s professional profile`}
         />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              html, body {
+                background-color: #00020E !important;
+              }
+              html {
+                color-scheme: dark;
+              }
+              html.dark {
+                background-color: #00020E !important;
+              }
+              .dark {
+                background-color: #00020E !important;
+              }
+              /* Force dark mode text colors with higher specificity */
+              .dark h1,
+              .dark h1 *,
+              .dark h1 span,
+              .dark h1 span * {
+                color: #f4f4f5 !important;
+              }
+              .dark h2,
+              .dark h2 *,
+              .dark h2 span,
+              .dark h2 span * {
+                color: #f4f4f5 !important;
+              }
+              .dark h3,
+              .dark h3 *,
+              .dark h3 span,
+              .dark h3 span * {
+                color: #f4f4f5 !important;
+              }
+              /* Target all heading and title text specifically */
+              .dark .text-zinc-800,
+              .dark span.text-zinc-800,
+              .dark div.text-zinc-800,
+              .dark * .text-zinc-800 {
+                color: #f4f4f5 !important;
+              }
+              .dark .text-zinc-100,
+              .dark span.text-zinc-100,
+              .dark div.text-zinc-100,
+              .dark * .text-zinc-100 {
+                color: #f4f4f5 !important;
+              }
+              .dark .text-zinc-900,
+              .dark span.text-zinc-900,
+              .dark div.text-zinc-900,
+              .dark * .text-zinc-900 {
+                color: #f4f4f5 !important;
+              }
+              /* All font weights and variants */
+              .dark .font-semibold,
+              .dark .font-bold,
+              .dark .font-medium {
+                color: #f4f4f5 !important;
+              }
+              /* Keep paragraph text as intended */
+              .dark p {
+                color: #a1a1aa !important;
+              }
+              /* Override any conflicting Tailwind classes */
+              .dark .text-zinc-600 {
+                color: #a1a1aa !important;
+              }
+              .dark .text-zinc-400 {
+                color: #a1a1aa !important;
+              }
+              .dark .text-zinc-500 {
+                color: #a1a1aa !important;
+              }
+              /* Ensure labels and form elements have proper colors */
+              .dark label,
+              .dark dt,
+              .dark dd {
+                color: #f4f4f5 !important;
+              }
+              /* Button text colors */
+              .dark button:not(.text-white),
+              .dark a:not(.text-white) {
+                color: #f4f4f5;
+              }
+            `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -549,10 +639,10 @@ export default function UserProfile({ profileData, notFound }) {
         />
         <link rel="icon" href="/codinscape.ico" type="image/x-icon" />
       </Head>
-      <div className="overflow-x-hidden" style={{ backgroundColor: '#00020E' }}>
+      <div className="overflow-x-hidden min-h-screen" style={{ backgroundColor: '#00020E' }}>
         <Hero profile={profile} />
         <Photos images={images} />
-        <Container className="mt-24 md:mt-28">
+        <Container className="mt-24 md:mt-28 pb-16">
           <div className="mx-auto max-w-xl space-y-10">
             <Projects projects={projects} />
             <Resume workExperiences={workExperiences} />
