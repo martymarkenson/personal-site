@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/future/image'
-import logoCS from '@/images/logos/codingscape_logo.jpeg'
+// import logoCS from '@/images/logos/codingscape_logo.jpeg' // Removed Codingscape logo import
 
 import { Container } from '@/components/Container'
 import { LinkedInIcon, TwitterIcon, SubstackIcon, GitHubIcon } from '@/components/SocialIcons'
@@ -38,7 +38,6 @@ export function Footer() {
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Image src={logoCS} alt="Codingscape" className="h-6 w-6 rounded-full" unoptimized />
                 <p className="text-sm text-zinc-400 dark:text-zinc-500">
                   &copy; {new Date().getFullYear()} Marty Markenson. All rights
                   reserved.
