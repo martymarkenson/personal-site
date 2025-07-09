@@ -638,7 +638,7 @@ export default function Home({ articles }) {
           </div>
         </div>
       </Container>
-      <Footer />
+      {/* <Footer /> removed to prevent double footer */}
     </>
   )
 }
